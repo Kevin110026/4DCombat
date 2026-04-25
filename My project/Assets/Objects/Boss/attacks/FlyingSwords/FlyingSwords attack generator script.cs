@@ -11,7 +11,7 @@ public class FlyingSwordsattackgeneratorscript : attackgenerator
     [HideInInspector] public int remainingSwords = 0;
     protected IEnumerator KeepDistance()
     {
-        float desiredDist = Mathf.Lerp(difficulity, 12, 20);
+        float desiredDist = Mathf.Lerp(difficulty, 12, 20);
         CharacterMovementScript cms = spawner.GetComponent<CharacterMovementScript>();
         while (true)
         {
@@ -26,7 +26,7 @@ public class FlyingSwordsattackgeneratorscript : attackgenerator
         StartCoroutine(KeepDistance());
         yield return new WaitForSeconds(0.6f);
         audioSource = spawner.GetComponent<AudioSource>();
-        int swordAmount = 3 + (difficulity >= 0.7 ? 1 : 0);
+        int swordAmount = 3 + (difficulty >= 0.7 ? 1 : 0);
         List<GameObject> swords = new List<GameObject>(swordAmount);
         for (int i = 0; i < swordAmount; i++)
         {
@@ -38,7 +38,7 @@ public class FlyingSwordsattackgeneratorscript : attackgenerator
             fsss.spawner = spawner;
             fsss.target = target;
             fsss.attackgenerator = this;
-            fsss.speed = fsss.GetMaxSpeed(difficulity);
+            fsss.speed = fsss.GetMaxSpeed(difficulty);
             fsss.speedUp = true;
             fsss.parriedSound = Resources.Load<AudioClip>("parry-1-limbus");
             remainingSwords++;
@@ -50,7 +50,7 @@ public class FlyingSwordsattackgeneratorscript : attackgenerator
                 if (i == 3)
                     fsss.GetComponent<AudioSource>().pitch = 1.2f;
             }
-            yield return new WaitForSeconds(Mathf.Lerp(difficulity, 1f, 0.5f));
+            yield return new WaitForSeconds(Mathf.Lerp(difficulty, 1f, 0.5f));
         }
         while (remainingSwords > 0)
             yield return null;

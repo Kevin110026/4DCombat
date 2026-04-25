@@ -87,11 +87,11 @@ public class TripleSlashattackgeneratorscript : attackgenerator
 
 
         //  starts the attack
-        implicitHintTime = Mathf.Lerp(1.2f, 0.6f, difficulity);
-        implicitHintReactionTime = Mathf.Lerp(0.35f, 0.23f, difficulity);
-        hintReactionTime = Mathf.Lerp(0.33f, 0.22f, difficulity);
-        slashTimeSeperate = Mathf.Lerp(0.55f, 0.35f, difficulity);
-        slashCount = (int)(Mathf.Lerp(3, 5, difficulity) + (UnityEngine.Random.Range(0, difficulity) >= 0.5f ? 1 : 0));
+        implicitHintTime = Mathf.Lerp(1.2f, 0.6f, difficulty);
+        implicitHintReactionTime = Mathf.Lerp(0.35f, 0.23f, difficulty);
+        hintReactionTime = Mathf.Lerp(0.33f, 0.22f, difficulty);
+        slashTimeSeperate = Mathf.Lerp(0.55f, 0.35f, difficulty);
+        slashCount = (int)(Mathf.Lerp(3, 5, difficulty) + (UnityEngine.Random.Range(0, difficulty) >= 0.5f ? 1 : 0));
 
 
         transform.position = spawner.transform.position;

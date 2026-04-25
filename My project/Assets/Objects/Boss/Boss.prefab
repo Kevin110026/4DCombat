@@ -136,9 +136,13 @@ MonoBehaviour:
   - {fileID: 3212924917620030944, guid: 416171692e13569428737923d30e1913, type: 3}
   - {fileID: 2044616338001455120, guid: dae40ad56ce3ee44fb147aef35214146, type: 3}
   - {fileID: 6599053971993159774, guid: daed0dc6c5ebdaf4e9def352bb7ed397, type: 3}
+  - {fileID: 1142319450252122472, guid: 4cc2c399618c3104b8d2bf01f852f802, type: 3}
   target: {fileID: 0}
   sword: {fileID: 4538194568192901001}
+  testingAttackId: 4
+  testingAttackDifficulty: 1
   currentAttackGenerator: {fileID: 0}
+  difficulty: 0.2
 --- !u!143 &8165706207956254457
 CharacterController:
   m_ObjectHideFlags: 0

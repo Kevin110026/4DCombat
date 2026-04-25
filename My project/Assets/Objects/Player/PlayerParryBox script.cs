@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,10 +10,13 @@ public class PlayerParryBoxscript : MonoBehaviour
     private static AudioSource audioSource;
     private float parryStart;
     private float parryCDend;
-    public float parryCD = 0.3f;
+    public float parryCD = 0.15f;
+    public float parryWindow = 0.3f;
     public GameObject parryLightObject;
     private Light parryLight;
     public AudioClip[] parrySounds;
+    private LinkedList<float> parryBuffer;
+    private float blockBufferTime;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,7 +24,9 @@ public class PlayerParryBoxscript : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        parryLight = parryLightObject.GetComponent<Light>(); ;
+        parryLight = parryLightObject.GetComponent<Light>();
+        parryBuffer = new LinkedList<float>();
+        blockBufferTime = Time.time - 1000f;
     }
     void Start()
     {
@@ -36,14 +43,45 @@ public class PlayerParryBoxscript : MonoBehaviour
 
     void UpdateParry()
     {
-        if (Mouse.current.rightButton.wasPressedThisFrame)
+        while (parryBuffer.Count > 0 && Time.time > parryBuffer.First.Value + parryWindow)
+            parryBuffer.RemoveFirst();
+        TryToParryFromBuffer();
+    }
+
+    bool TryToParryFromBuffer()
+    {
+        if (parryBuffer.Count > 0 && TryToParry(parryBuffer.First.Value))
         {
-            if (Time.time >= parryCDend)
-            {
-                parryStart = Time.time;
-                parryCDend = parryStart + parryCD;
-            }
+            parryBuffer.RemoveFirst();
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool TryToParry(float parryTime)
+    {
+        if (parryTime >= parryCDend)
+        {
+            parryStart = parryTime;
+            parryCDend = parryStart + parryWindow + parryCD;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void AddParryToBuffer()
+    {
+        if (Time.time <= blockBufferTime)
+            return;
+        Debug.Log(gameObject.GetEntityId() + " add parry: " + Time.time);
+        parryBuffer.AddLast(Time.time);
+        TryToParryFromBuffer();
     }
 
 
@@ -57,7 +95,7 @@ public class PlayerParryBoxscript : MonoBehaviour
 
     public bool VerifyParryForAttack(Attackscript attack)
     {
-        if (Time.time <= parryStart + 0.3f && attack.canBeParried)
+        if (Time.time <= parryStart + parryWindow && attack.canBeParried)
         {
             OnParry(attack);
             attack.OnParried(transform.parent.gameObject);
@@ -76,7 +114,21 @@ public class PlayerParryBoxscript : MonoBehaviour
             audioSource.PlayOneShot(attack.parriedSound);
         else
             audioSource.PlayOneShot(audioSource.clip);
-        parryCDend = Time.time;
+        parryCDend = Time.time - 100 * parryWindow;
+        parryStart = Time.time - 100 * parryWindow;
         parryLight.intensity = 100f;
+        TryToParryFromBuffer();
+    }
+    public void ResetBufferAndCd()
+    {
+        parryBuffer.Clear();
+        parryCDend = Time.time - 100 * parryWindow;
+        parryStart = Time.time - 100 * parryWindow;
+        blockBufferTime = Time.time + 0.1f;
+    }
+
+    public bool IsParrying()
+    {
+        return Time.time <= parryStart + parryWindow;
     }
 }

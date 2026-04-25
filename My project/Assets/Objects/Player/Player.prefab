@@ -168,6 +168,7 @@ MonoBehaviour:
   doneMoveTo: 1
   moveToSpeed: 0
   moveToDestination: {x: 0, y: 0, z: 0}
+  moveToFinalVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &3241255102641126464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Playerscript
   DamagedSound: {fileID: 8300000, guid: 0b7cc4e5cb3e06844a6957b448a60618, type: 3}
   hp: 100
+  parry: {fileID: 8201028750058624143}
 --- !u!82 &5630584116678174980
 AudioSource:
   m_ObjectHideFlags: 0
@@ -553,6 +555,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+--- !u!114 &8201028750058624143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8149849651591014406, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+  m_PrefabInstance: {fileID: 60232512104758409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf20326388310a4ab478b690e19ffb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerParryBoxscript
 --- !u!4 &8673881745042059847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8685803601279635150, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}

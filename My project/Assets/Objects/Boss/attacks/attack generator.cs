@@ -6,7 +6,7 @@ public class attackgenerator : MonoBehaviour
     protected static readonly WaitForSeconds _waitForSeconds1 = new(1);
     [HideInInspector] public GameObject spawner;
     [HideInInspector] public GameObject target;
-    public float difficulity = 0.2f;
+    public float difficulty = 0.2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()

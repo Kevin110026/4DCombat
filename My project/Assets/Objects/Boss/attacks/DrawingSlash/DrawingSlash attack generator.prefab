@@ -46,7 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawingSlashattackgeneratorscript
   spawner: {fileID: 0}
   target: {fileID: 0}
-  difficulity: 0.2
+  difficulty: 0.2
   HintLightPrefab: {fileID: 4647558598215781263, guid: e96c1cda570a7314ab4655f6258ed5a5, type: 3}
   SlashPerfab: {fileID: 6221952494977711241, guid: 5808dccb6beb3d644bbdb83e05d5f58d, type: 3}
   TrailPerfab: {fileID: 3860630665087667662, guid: ca4b9281464032b4cac9716d59e5cdc3, type: 3}
+  TrailParriedableMaterial: {fileID: 2100000, guid: f4fee7841fd3a544a970480efa2a8bf0, type: 2}
+  TrailUnparriedableMaterial: {fileID: 2100000, guid: 5d507e909df90ca4c800123b09abb3f1, type: 2}
+  invisable: 0
+  randomAngle: 0
+  unparriedable: 0
+  lowcd: 0

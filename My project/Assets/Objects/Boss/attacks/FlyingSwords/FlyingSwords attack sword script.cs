@@ -37,7 +37,7 @@ public class FlyingSwordsattackswordscript : Attackscript
         float derDot = Vector3.Dot(posDiff.normalized, transform.forward);
 
 
-        if (posDiff.magnitude >= 0.75f * GetMaxSpeed(attackgenerator.difficulity))
+        if (posDiff.magnitude >= 0.75f * GetMaxSpeed(attackgenerator.difficulty))
         {
             if (derDot >= Mathf.Sqrt(3) / 2)
             {
@@ -64,14 +64,14 @@ public class FlyingSwordsattackswordscript : Attackscript
 
         if (speedUp)
         {
-            speed += Time.deltaTime * GetMaxAcceleration(attackgenerator.difficulity);
+            speed += Time.deltaTime * GetMaxAcceleration(attackgenerator.difficulty);
         }
         else
         {
-            speed -= Time.deltaTime * GetMaxAcceleration(attackgenerator.difficulity);
+            speed -= Time.deltaTime * GetMaxAcceleration(attackgenerator.difficulty);
         }
 
-        speed = Mathf.Clamp(speed, 3, GetMaxSpeed(attackgenerator.difficulity));
+        speed = Mathf.Clamp(speed, 3, GetMaxSpeed(attackgenerator.difficulty));
 
         if (!attacking && rngRotateDiff == 1)
         {
@@ -83,7 +83,7 @@ public class FlyingSwordsattackswordscript : Attackscript
         }
 
         Vector3 targetDir = target.transform.position - transform.position;
-        float maxRadiansDelta = 4 * GetMaxAcceleration(attackgenerator.difficulity) * rngRotateDiff / (speedUp ? 2 : 1) / speed * Time.deltaTime;
+        float maxRadiansDelta = 4 * GetMaxAcceleration(attackgenerator.difficulty) * rngRotateDiff / (speedUp ? 2 : 1) / speed * Time.deltaTime;
         Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, maxRadiansDelta, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDir);
         transform.position += transform.forward * speed * Time.deltaTime;
@@ -125,7 +125,7 @@ public class FlyingSwordsattackswordscript : Attackscript
             {
                 audioSource.time = 0.1f;
             }
-            if (posDiff.magnitude / GetMaxSpeed(attackgenerator.difficulity) <= 0.5f && canDamage)
+            if (posDiff.magnitude / GetMaxSpeed(attackgenerator.difficulty) <= 0.5f && canDamage)
             {
                 audioSource.volume = 0;
             }
@@ -211,13 +211,13 @@ public class FlyingSwordsattackswordscript : Attackscript
     public override void OnParried(GameObject parrier)
     {
         base.OnParried(parrier);
-        if (attackCount >= 3)
+        if (attackCount >= 2)
             Destroy(gameObject);
     }
     protected override void DamagePlayer(GameObject player)
     {
         base.DamagePlayer(player);
-        if (attackCount >= 3)
+        if (attackCount >= 2)
             Destroy(gameObject);
     }
 }

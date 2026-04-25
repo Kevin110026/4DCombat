@@ -6,7 +6,9 @@ public class DrawingSlashattackslashscript : Attackscript
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, 50f);
+        RaycastHit[] hits;
+        if (canBeParried) hits = Physics.RaycastAll(transform.position, transform.forward, 50f);
+        else hits = Physics.SphereCastAll(transform.position, 3.0f, transform.forward, 50f);
         System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
         foreach (RaycastHit hit in hits)
         {

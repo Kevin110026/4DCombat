@@ -24,7 +24,10 @@ public class AttackHinterscript : MonoBehaviour
         activeTime = spawnTime + hintTime + spaceTime;
         endTime = activeTime + liveTime;
         audioSource = GetComponent<AudioSource>();
-        audioSource.pitch = audioSource.clip.length / hintTime;
+        if (hintTime <= audioSource.clip.length)
+            audioSource.time = audioSource.clip.length - hintTime;
+        else
+            audioSource.pitch = audioSource.clip.length / hintTime;
         audioSource.Play();
     }
 

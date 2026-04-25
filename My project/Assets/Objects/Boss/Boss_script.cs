@@ -7,8 +7,11 @@ public class Boss_script : MonoBehaviour
     public Object[] attacks;
     public GameObject target;
     public GameObject sword;
+    public int testingAttackId = 0;
+    public float testingAttackDifficulty = 0.2f;
     [HideInInspector]
     public GameObject currentAttackGenerator = null;
+    public float difficulty = 0.2f;
 
     private Vector3 swordOriginalTransformPosition;
     private Quaternion swordOriginalTransformRotation;
@@ -51,7 +54,7 @@ public class Boss_script : MonoBehaviour
     {
         if (Keyboard.current.cKey.wasPressedThisFrame)
         {
-            int i = 1;
+            int i = testingAttackId;
             Object attack = attacks[i];
             Object instant = Instantiate(attack, new Vector3(0, 0, 0), new Quaternion());
             currentAttackGenerator = (GameObject)instant;
@@ -63,6 +66,7 @@ public class Boss_script : MonoBehaviour
             }
             attack_generator_script.spawner = gameObject;
             attack_generator_script.target = target;
+            attack_generator_script.difficulty = testingAttackDifficulty;
 
         }
         if (Keyboard.current.rKey.wasPressedThisFrame)
@@ -96,6 +100,6 @@ public class Boss_script : MonoBehaviour
         }
         attack_generator_script.spawner = this.gameObject;
         attack_generator_script.target = target;
-        attack_generator_script.difficulity = 0.5f;
+        attack_generator_script.difficulty = difficulty;
     }
 }

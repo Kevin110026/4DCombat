@@ -489,6 +489,18 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1216723035}
+    - target: {fileID: -8922921185207210699, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
+      propertyPath: difficulty
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8922921185207210699, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
+      propertyPath: testingAttackId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8922921185207210699, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
+      propertyPath: testingAttackDifficulty
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6558811464796353855, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 65.166

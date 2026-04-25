@@ -34,21 +34,21 @@ public class ViperStrikeattackgeneratorscript : attackgenerator
 
     protected override IEnumerator StartAttack()
     {
-        float delay = Mathf.Lerp(0.4f, 0.2f, difficulity);
-        int cycles = Mathf.RoundToInt(UnityEngine.Random.Range(1 + difficulity * 2f, 2 + difficulity * 2.49f));
+        float delay = Mathf.Lerp(0.4f, 0.2f, difficulty);
+        int cycles = Mathf.RoundToInt(UnityEngine.Random.Range(1 + difficulty * 2f, 2 + difficulty * 2.49f));
         bool gottenClose = false;
         while (!gottenClose)
         {
             gottenClose = GetCloseToTarget();
             yield return null;
         }
-        yield return new WaitForSeconds(Mathf.Lerp(0.55f, 0.4f, difficulity) - delay);
+        yield return new WaitForSeconds(Mathf.Lerp(0.55f, 0.4f, difficulty) - delay);
         for (int i = 0; i < cycles; i++)
         {
             int dashes = UnityEngine.Random.Range(1, 4);
             List<float> dashTimeStamps = new List<float>(dashes);
             float t = 0.0f;
-            float delayRngRange = Mathf.Lerp(0.1f, 0.5f, difficulity);
+            float delayRngRange = Mathf.Lerp(0.1f, 0.5f, difficulty);
             for (int j = 0; j < dashes; j++)
             {
                 dashTimeStamps.Add(t + delay * UnityEngine.Random.Range(1 - delayRngRange, 1 + delayRngRange));
@@ -71,7 +71,7 @@ public class ViperStrikeattackgeneratorscript : attackgenerator
             // yield return new WaitForSeconds(delay);
 
             Slash(i == cycles - 1);
-            yield return new WaitForSeconds(Mathf.Lerp(0.8f, 0.4f, difficulity) - delay);
+            yield return new WaitForSeconds(Mathf.Lerp(0.8f, 0.4f, difficulty) - delay);
         }
 
         Destroy(this.gameObject);

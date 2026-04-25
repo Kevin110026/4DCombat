@@ -14,7 +14,21 @@ public class DrawingSlashattackgeneratorscript : attackgenerator
     private GameObject HintSound = null;
     public UnityEngine.Object SlashPerfab;
     public UnityEngine.Object TrailPerfab;
+    public Material TrailParriedableMaterial;
+    public Material TrailUnparriedableMaterial;
+    private float hintTime;
+    private float reactionTime;
 
+    [HideInInspector] public bool invisable = false;
+    [HideInInspector] public bool randomAngle = false;
+    [HideInInspector] public bool unparriedable = false;
+    [HideInInspector] public bool lowcd = false;
+    [HideInInspector] public AudioClip parriedSound;
+
+    void Awake()
+    {
+        parriedSound = Resources.Load<AudioClip>("parry-3-limbus");
+    }
     protected override void Start()
     {
         base.Start();
@@ -34,45 +48,126 @@ public class DrawingSlashattackgeneratorscript : attackgenerator
     {
         base.Update();
         HintLightLight.intensity *= Mathf.Pow(0.8f, Time.deltaTime * 60);
-        if (HintSound != null)
-        {
-            HintSound.transform.position = spawner.transform.position;
-        }
     }
 
     protected override IEnumerator StartAttack()
     {
-        float hintTime = Mathf.Lerp(0.8f, 0.3f, difficulity);
-        float reactionTime = Mathf.Lerp(0.35f, 0.22f, difficulity);
-        if (UnityEngine.Random.Range(0, 2) == 0)
+        hintTime = Mathf.Lerp(0.8f, 0.3f, difficulty);
+        reactionTime = Mathf.Lerp(0.35f, 0.22f, difficulty);
+        // if (UnityEngine.Random.Range(0f, 1f) <= 0.5)
+        if (!invisable)
         {
-            yield return new WaitForSeconds(hintTime);
-            HintLightLight.intensity = 1000;
-            yield return new WaitForSeconds(reactionTime);
+            yield return StartCoroutine(VisableSlash());
         }
         else
         {
-            HintSound = AttackHinterscript.NewPlayer(Resources.Load<AudioClip>("A Piano"), hintTime, reactionTime);
-            yield return new WaitForSeconds(hintTime + reactionTime);
+            yield return StartCoroutine(InvisableSlash());
         }
-        yield return StartCoroutine(Slash());
         Destroy(gameObject);
     }
 
+    IEnumerator VisableSlash()
+    {
+        yield return new WaitForSeconds(hintTime);
+        HintLightLight.intensity = 1000;
+        yield return new WaitForSeconds(reactionTime);
+        attackTargetLocation = target.transform.position;
+        yield return StartCoroutine(Slash());
+    }
+    IEnumerator InvisableSlash()
+    {
+        // if (UnityEngine.Random.Range(0f, 1f) <= 0.5)
+        if (!randomAngle)
+        {
+            yield return StartCoroutine(InvisableSlashStraight());
+        }
+        else
+        {
+            hintTime *= 1.3f;
+            yield return StartCoroutine(InvisableSlashRandom());
+        }
+        yield return StartCoroutine(Slash());
+    }
+
+    IEnumerator InvisableSlashStraight()
+    {
+        HintSound = AttackHinterscript.NewPlayer(Resources.Load<AudioClip>("A Piano"), hintTime, reactionTime);
+        float t = Time.time + hintTime + reactionTime;
+        while (Time.time <= t)
+        {
+            HintSound.transform.position = spawner.transform.position;
+            yield return null;
+        }
+        attackTargetLocation = target.transform.position;
+    }
+
+    private Vector3 attackTargetLocation;
+    IEnumerator InvisableSlashRandom()
+    {
+        if (unparriedable) reactionTime *= 1.5f;
+
+        float positionAngle = Quaternion.LookRotation(target.transform.position - spawner.transform.position).eulerAngles.y;
+        positionAngle += UnityEngine.Random.Range(-90f, 90f);
+        Vector3 diffLocation = Quaternion.Euler(0f, positionAngle, 0f) * Vector3.forward;
+        diffLocation *= 15f;
+        Vector3 attackLocation = target.transform.position - diffLocation;
+        AudioClip hintSound = unparriedable ? Resources.Load<AudioClip>("D Piano") : Resources.Load<AudioClip>("A Piano");
+        HintSound = AttackHinterscript.NewPlayer(hintSound, hintTime, reactionTime);
+        HintSound.transform.position = attackLocation;
+        float t = Time.time + hintTime;
+
+
+        while (Time.time <= t)
+            yield return null;
+        t = Time.time + reactionTime;
+        attackTargetLocation = target.transform.position;
+        while (Time.time <= t)
+            yield return null;
+        if (!unparriedable)
+            attackTargetLocation = target.transform.position;
+
+        CharacterController characterController = spawner.GetComponent<CharacterController>();
+        characterController.enabled = false;
+        spawner.transform.position = attackLocation;
+        characterController.enabled = true;
+    }
+    private GameObject tro;
+
     IEnumerator Slash()
     {
-        GameObject strike = (GameObject)Instantiate(SlashPerfab, spawner.transform.position, Quaternion.LookRotation(target.transform.position - spawner.transform.position));
-        Attackscript ats = strike.GetComponent<Attackscript>();
-        ats.parriedSound = Resources.Load<AudioClip>("parry-1-limbus");
+        GameObject slash = (GameObject)Instantiate(SlashPerfab, spawner.transform.position, Quaternion.LookRotation(attackTargetLocation - spawner.transform.position));
+        DrawingSlashattackslashscript ats = slash.GetComponent<DrawingSlashattackslashscript>();
+        ats.parriedSound = parriedSound;
+        ats.canBeParried = !unparriedable;
+        tro = (GameObject)Instantiate(TrailPerfab, spawner.transform);
+        TrailRenderer trotr = tro.GetComponent<TrailRenderer>();
+        trotr.material = unparriedable ? TrailUnparriedableMaterial : TrailParriedableMaterial;
+        if (unparriedable)
+        {
+            trotr.enabled = false;
+            // trotr.widthMultiplier = 2.4f;
+        }
+        else
+        {
+            trotr.widthMultiplier = 1;
+        }
+        LineRenderer trolr = tro.GetComponent<LineRenderer>();
+        trolr.material = unparriedable ? TrailUnparriedableMaterial : TrailParriedableMaterial;
+        if (unparriedable)
+        {
+            trolr.SetPositions(new Vector3[] { spawner.transform.position, spawner.transform.position });
+            // trolr.widthMultiplier = 0f;
+            trolr.widthMultiplier = 3.0f;
+        }
+        else
+        {
+            trolr.enabled = false;
+        }
 
-        GameObject tro = (GameObject)Instantiate(TrailPerfab, spawner.transform);
-        GameObject slash = (GameObject)Instantiate(SlashPerfab, spawner.transform.position, spawner.transform.rotation);
+
         yield return null;
 
-        // Physics.IgnoreCollision(spawner.GetComponent<Collider>(), target.GetComponent<Collider>(), true);
-        // Physics.SyncTransforms();
-
-        Vector3 deltapos = target.transform.position - spawner.transform.position;
+        Vector3 deltapos = attackTargetLocation - spawner.transform.position;
 
         CharacterController characterController = spawner.GetComponent<CharacterController>();
 
@@ -80,16 +175,16 @@ public class DrawingSlashattackgeneratorscript : attackgenerator
         spawner.transform.position += deltapos.normalized * (deltapos.magnitude + 10);
         characterController.enabled = true;
 
-        // Physics.SyncTransforms();
-        // Physics.IgnoreCollision(spawner.GetComponent<Collider>(), target.GetComponent<Collider>(), false);
+        trolr.SetPosition(1, spawner.transform.position);
 
-        yield return new WaitForSeconds(Mathf.Lerp(0.75f, 0.45f, difficulity));
+        yield return new WaitForSeconds(Mathf.Lerp(0.75f, 0.45f, difficulty) * (lowcd ? 0.0f : 1f));
 
-        GameObject.Destroy(tro);
+        // GameObject.Destroy(tro);
     }
 
     void OnDestroy()
     {
         GameObject.Destroy(HintLight);
+        // GameObject.Destroy(tro);
     }
 }
