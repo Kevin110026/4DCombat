@@ -52,8 +52,8 @@ public class DrawingSlashattackgeneratorscript : attackgenerator
 
     protected override IEnumerator StartAttack()
     {
-        hintTime = Mathf.Lerp(0.8f, 0.3f, difficulty);
-        reactionTime = Mathf.Lerp(0.35f, 0.22f, difficulty);
+        hintTime = lowcd ? Mathf.Lerp(0.5f, 0.3f, difficulty) : Mathf.Lerp(0.8f, 0.3f, difficulty) * UnityEngine.Random.Range(1, 1 + difficulty);
+        reactionTime = lowcd ? Mathf.Lerp(0.28f, 0.18f, difficulty) : Mathf.Lerp(0.35f, 0.2f, difficulty);
         // if (UnityEngine.Random.Range(0f, 1f) <= 0.5)
         if (!invisable)
         {
@@ -70,6 +70,7 @@ public class DrawingSlashattackgeneratorscript : attackgenerator
     {
         yield return new WaitForSeconds(hintTime);
         HintLightLight.intensity = 1000;
+        // Animator animator = GetComponent<Animator>();
         yield return new WaitForSeconds(reactionTime);
         attackTargetLocation = target.transform.position;
         yield return StartCoroutine(Slash());

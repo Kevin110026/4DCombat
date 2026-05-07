@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8165706207956254457}
   - component: {fileID: -8793791477603613822}
   - component: {fileID: 4585241705828036851}
+  - component: {fileID: 2052721730550559915}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -139,7 +140,7 @@ MonoBehaviour:
   - {fileID: 1142319450252122472, guid: 4cc2c399618c3104b8d2bf01f852f802, type: 3}
   target: {fileID: 0}
   sword: {fileID: 4538194568192901001}
-  testingAttackId: 4
+  testingAttackId: 1
   testingAttackDifficulty: 1
   currentAttackGenerator: {fileID: 0}
   difficulty: 0.2
@@ -286,6 +287,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &2052721730550559915
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405952400097510385}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca31c30179ee19d4fbaab39528112dfa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8693924980694149111
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!20 &330585545 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 500972135783903845, guid: 10b468e4d0dcdab4d8fd481db9da4a4a, type: 3}
-  m_PrefabInstance: {fileID: 5135655178401401469}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +315,7 @@ Animator:
   m_GameObject: {fileID: 1328666499}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8ed0305b965ad5e42a4c689ab55ca5bb, type: 2}
+  m_Controller: {fileID: 9100000, guid: ca31c30179ee19d4fbaab39528112dfa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -499,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8922921185207210699, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
       propertyPath: testingAttackDifficulty
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6558811464796353855, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -573,10 +568,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 500972135783903845, guid: 10b468e4d0dcdab4d8fd481db9da4a4a, type: 3}
-      propertyPath: field of view
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 601120523882531268, guid: 10b468e4d0dcdab4d8fd481db9da4a4a, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -628,18 +619,6 @@ PrefabInstance:
     - target: {fileID: 3241255102641126464, guid: 10b468e4d0dcdab4d8fd481db9da4a4a, type: 3}
       propertyPath: jumpHeight
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3241255102641126464, guid: 10b468e4d0dcdab4d8fd481db9da4a4a, type: 3}
-      propertyPath: playerCamera
-      value: 
-      objectReference: {fileID: 330585545}
-    - target: {fileID: 6778123085727180342, guid: 10b468e4d0dcdab4d8fd481db9da4a4a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778123085727180342, guid: 10b468e4d0dcdab4d8fd481db9da4a4a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.805
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

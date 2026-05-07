@@ -60,16 +60,6 @@ public class ViperStrikeattackgeneratorscript : attackgenerator
             playHint(delay);
             yield return new WaitForSeconds(2 * delay);
 
-            // for (int j = 0; j < dashes; j++)
-            // {
-            //     if (j + 1 == dashes)
-            //         playHint(delay);
-            //     yield return new WaitForSeconds(delay);
-            //     DashTowardTarget();
-            //     while (!movement.doneMoveTo) yield return null;
-            // }
-            // yield return new WaitForSeconds(delay);
-
             Slash(i == cycles - 1);
             yield return new WaitForSeconds(Mathf.Lerp(0.8f, 0.4f, difficulty) - delay);
         }
@@ -120,6 +110,15 @@ public class ViperStrikeattackgeneratorscript : attackgenerator
 
     void Slash(bool finalShash = false)
     {
+
+        Vector3 deltaPos = spawner.transform.position - target.transform.position;
+        deltaPos = deltaPos.normalized;
+        Vector3 finalDeltaPos = deltaPos * 2f;
+        movement.maxAcceleration = 1200;
+        movement.maxMoveSpeed = 600;
+        movement.MoveToXZ(target.transform.position + finalDeltaPos);
+        audioSource.PlayOneShot(whosh);
+
         // audioSource.PlayOneShot(slash);
         GameObject strike = (GameObject)Instantiate(StrikePerfab, spawner.transform.position, Quaternion.LookRotation(target.transform.position - spawner.transform.position));
         Attackscript ats = strike.GetComponent<Attackscript>();

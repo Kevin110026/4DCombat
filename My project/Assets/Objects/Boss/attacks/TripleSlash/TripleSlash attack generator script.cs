@@ -77,13 +77,18 @@ public class TripleSlashattackgeneratorscript : attackgenerator
         relativePosition.x += randomShift.x;
         relativePosition.z += randomShift.y;
         relativePosition.y = spawner.transform.position.y - target.transform.position.y;
+        movement.maxAcceleration *= Mathf.Lerp(1f, 7f, difficulty);
+        movement.maxMoveSpeed *= Mathf.Lerp(1f, 7f, difficulty);
         movement.MoveToXZ(relativePosition + target.transform.position, 30);
+        // float t = Time.time+1f;
 
         while (!movement.doneMoveTo)
         {
             // Debug.Log
             yield return null;
         }
+
+        movement.ResetMaxSpeedAndAcceletarion();
 
 
         //  starts the attack
@@ -114,7 +119,7 @@ public class TripleSlashattackgeneratorscript : attackgenerator
         {
             StartCoroutine(StartNormalSlash(slashTimeStamps[i] - hintReactionTime));
         }
-        
+
         yield return
         StartCoroutine(StartImplicitSlash(slashTimeStamps[slashCount - 1] - implicitHintTime - implicitHintReactionTime));
 

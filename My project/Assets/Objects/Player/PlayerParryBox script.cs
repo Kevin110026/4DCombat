@@ -79,7 +79,6 @@ public class PlayerParryBoxscript : MonoBehaviour
     {
         if (Time.time <= blockBufferTime)
             return;
-        Debug.Log(gameObject.GetEntityId() + " add parry: " + Time.time);
         parryBuffer.AddLast(Time.time);
         TryToParryFromBuffer();
     }

@@ -49,7 +49,7 @@ public class FlyingSwordsattackswordscript : Attackscript
                 if (derDot < 0f)
                 {
                     EndAttack();
-                    if (attackCount >= 3)
+                    if (attackCount >= 2)
                         Destroy(gameObject);
                 }
             }

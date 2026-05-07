@@ -42,9 +42,9 @@ public class Boss_script : MonoBehaviour
 
         if (currentAttackGenerator == null)
         {
-            sword.transform.localPosition = swordOriginalTransformPosition;
-            sword.transform.localRotation = swordOriginalTransformRotation;
-            sword.transform.localScale = swordOriginalTransformScale;
+            // sword.transform.localPosition = swordOriginalTransformPosition;
+            // sword.transform.localRotation = swordOriginalTransformRotation;
+            // sword.transform.localScale = swordOriginalTransformScale;
         }
     }
 

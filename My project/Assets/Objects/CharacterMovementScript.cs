@@ -49,12 +49,22 @@ public class CharacterMovementScript : MonoBehaviour
 
     void Update()
     {
+        characterController.Move(velocity / 2 * Time.deltaTime);
         if (!doneMoveTo)
         {
             //  1/2*at^2 = diff
             //  t
+
+            /*
+            D -= last_s/2*dt
+            s^2/(2a) = D - s/2*dt
+            s^2 + s*a - D*2*a = 0
+            */
             Vector3 diff = moveToDestination - transform.position;
-            float speed = (float)Math.Sqrt(2 * maxAcceleration * diff.magnitude);
+            float a = 1;
+            float b = maxAcceleration * Time.deltaTime;
+            float c = -2 * maxAcceleration * diff.magnitude;
+            float speed = (-b + Mathf.Sqrt(b * b - 4 * a * c)) / (2 * a);
             speed = Math.Min(speed, maxMoveSpeed);
             Vector3 speedVec = diff.normalized * speed + moveToFinalVelocity;
             speed = Math.Min(speedVec.magnitude, maxMoveSpeed);
@@ -71,7 +81,8 @@ public class CharacterMovementScript : MonoBehaviour
         acceleration.y += gravity * Time.deltaTime;
         velocity += acceleration;
 
-        characterController.Move(velocity * Time.deltaTime);
+        characterController.Move(velocity / 2 * Time.deltaTime);
+        
         if (characterController.isGrounded)
         {
             velocity.y = 0;

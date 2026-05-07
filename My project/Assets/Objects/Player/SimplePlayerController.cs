@@ -26,6 +26,9 @@ public class SimplePlayerController : MonoBehaviour
     {
         HandlePlayerRotation();
         HandlePlayerMovement();
+    }
+    void LateUpdate()
+    {
         HandleCamera();
     }
 
