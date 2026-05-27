@@ -19,6 +19,9 @@ GameObject:
   - component: {fileID: 4595490336749846848}
   - component: {fileID: 5630584116678174980}
   - component: {fileID: 7732860048094200849}
+  - component: {fileID: 2971608018631472854}
+  - component: {fileID: 3193007630014899782}
+  - component: {fileID: 8355827950604245102}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -333,6 +336,51 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2971608018631472854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500905777725579184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec69fd3594cc4f14281f854152dca872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterHpScript
+  HpMax: 0
+  Hp: 0
+--- !u!114 &3193007630014899782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500905777725579184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3975e54c969770e48bf767c179fa00f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterEnergyScript
+  TotalEnergyMax: 0
+  TotalEnergy: 0
+  BurstEnergyMax: 0
+  BurstEnergy: 0
+--- !u!114 &8355827950604245102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500905777725579184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb33980f81fd90f4c957319a67335cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterScript
+  movementScript: {fileID: 0}
+  hpScript: {fileID: 0}
+  energyScript: {fileID: 0}
 --- !u!1 &5553908454074072996
 GameObject:
   m_ObjectHideFlags: 0

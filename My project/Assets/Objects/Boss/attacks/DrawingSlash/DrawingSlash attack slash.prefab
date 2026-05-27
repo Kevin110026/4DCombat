@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e1a67435f77b64db8869a4213f36ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DrawingSlashattackslashscript
-  damage: 0
+  damage: 30
   haveDamaged: 0
   canBeParried: 1
   parriedPitch: 1

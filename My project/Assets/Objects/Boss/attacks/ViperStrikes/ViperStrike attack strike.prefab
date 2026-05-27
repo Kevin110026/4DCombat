@@ -44,8 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0b6fc8ea7435045aa7098f982c657d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ViperStrikeattackstrikescript
-  damage: 0
+  damage: 30
   haveDamaged: 0
   canBeParried: 1
   parriedPitch: 1
   parriedSound: {fileID: 0}
+  spawner: {fileID: 0}
+  target: {fileID: 0}
+  attackgenerator: {fileID: 0}

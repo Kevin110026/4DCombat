@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(CharacterMovementScript))]
+// [RequireComponent(typeof(CharacterMovementScript))]
 public class CharacterMovementScript : MonoBehaviour
 {
     public float maxMoveSpeed = 5f;
@@ -22,7 +22,6 @@ public class CharacterMovementScript : MonoBehaviour
     private Vector3 optimizedAcceleration;
     private float velocityDecay = 0.1f;
     private Vector3 acceleration = Vector3.zero;
-    private CharacterMovementScript movement;
     [HideInInspector]
     public bool doneMoveTo = true;
     [HideInInspector]
@@ -34,7 +33,6 @@ public class CharacterMovementScript : MonoBehaviour
 
     void Awake()
     {
-        movement = GetComponent<CharacterMovementScript>();
         oriMaxMoveSpeed = maxMoveSpeed;
         oriMaxAcceleration = maxAcceleration;
         moveToFinalVelocity = Vector3.zero;

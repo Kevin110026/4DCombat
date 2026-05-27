@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 7f079a06fc128674f838ee46a36a264f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spawner: {instanceID: 0}
+  - target: {instanceID: 0}
+  - HintLightPrefab: {fileID: 4647558598215781263, guid: e96c1cda570a7314ab4655f6258ed5a5, type: 3}
+  - SlashPerfab: {fileID: 6221952494977711241, guid: 5808dccb6beb3d644bbdb83e05d5f58d, type: 3}
+  - TrailPerfab: {fileID: 3860630665087667662, guid: ca4b9281464032b4cac9716d59e5cdc3, type: 3}
+  - TrailParriedableMaterial: {fileID: 2100000, guid: f4fee7841fd3a544a970480efa2a8bf0, type: 2}
+  - TrailUnparriedableMaterial: {fileID: 2100000, guid: 5d507e909df90ca4c800123b09abb3f1, type: 2}
+  - parriedSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

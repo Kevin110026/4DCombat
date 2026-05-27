@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a636151f035c84cb5b4510f950dcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyingSwordsattacksword
-  damage: 0
+  damage: 30
   haveDamaged: 0
   canBeParried: 1
   parriedPitch: 1
@@ -234,6 +234,7 @@ MonoBehaviour:
   decay: 0.9
   visible: 1
   sound: {fileID: 0}
+  speedUp: 0
 --- !u!82 &1000995014202006983
 AudioSource:
   m_ObjectHideFlags: 0
