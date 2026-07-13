@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1a28555eba0ccd740b3d78482b094ec0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spawner: {instanceID: 0}
+  - target: {instanceID: 0}
+  - WindupAnimation: {fileID: 7400000, guid: 27e3ef33d1ee6c04a8b742c5d6254fd4, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

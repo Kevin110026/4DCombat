@@ -131,9 +131,33 @@ PrefabInstance:
       propertyPath: playerscript
       value: 
       objectReference: {fileID: 1216723036}
+    - target: {fileID: 3293478885678574340, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
+      propertyPath: characterScript
+      value: 
+      objectReference: {fileID: 1216723038}
+    - target: {fileID: 3895047242338313705, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3895047242338313705, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4209412996820922698, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
       propertyPath: m_Name
       value: PlayerUICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5109992515118870941, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
+      propertyPath: characterScript
+      value: 
+      objectReference: {fileID: 1216723038}
+    - target: {fileID: 5306530090814992180, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306530090814992180, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7109642767144694654, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -143,6 +167,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7520997676073322766, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
+      propertyPath: characterScript
+      value: 
+      objectReference: {fileID: 1216723038}
     - target: {fileID: 9187416232842962183, guid: 0288ff2a1ceb7e44b8d6fc5752297d2d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -420,6 +448,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca3780f0226fa6478892a50f19589f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Playerscript
+--- !u!114 &1216723038 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8355827950604245102, guid: 10b468e4d0dcdab4d8fd481db9da4a4a, type: 3}
+  m_PrefabInstance: {fileID: 5135655178401401469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216723035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb33980f81fd90f4c957319a67335cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterScript
 --- !u!1 &1328666499 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8405952400097510385, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
@@ -606,15 +645,15 @@ PrefabInstance:
       objectReference: {fileID: 1216723035}
     - target: {fileID: -8922921185207210699, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
       propertyPath: difficulty
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8922921185207210699, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
-      propertyPath: testingAttackId
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8922921185207210699, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
+      propertyPath: testingAttackId
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8922921185207210699, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
       propertyPath: testingAttackDifficulty
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6558811464796353855, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -672,7 +711,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6906037840394411896, guid: b5d59420c3f268e4eb89fc04b512f594, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

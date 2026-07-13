@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2eb67e91f4687ec499df2bdfe6f8a193
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spawner: {instanceID: 0}
+  - target: {instanceID: 0}
+  - SpinEndAnimation: {fileID: 7400000, guid: 27efb1017b6dd814ba0ab5dc31d85341, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

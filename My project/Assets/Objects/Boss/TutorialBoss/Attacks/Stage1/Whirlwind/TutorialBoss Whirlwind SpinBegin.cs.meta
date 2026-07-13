@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: be90458418312ae4582a70528e141ce6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spawner: {instanceID: 0}
+  - target: {instanceID: 0}
+  - SpinBeginAnimation: {fileID: 7400000, guid: 79a7194a7cb57194089f5336c7ec58d0, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

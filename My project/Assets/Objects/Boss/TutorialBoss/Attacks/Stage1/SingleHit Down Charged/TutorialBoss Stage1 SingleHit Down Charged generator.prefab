@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5260093410940918252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1727039103623789005}
+  - component: {fileID: 2663370427814241070}
+  m_Layer: 0
+  m_Name: TutorialBoss Stage1 SingleHit Down Charged generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1727039103623789005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260093410940918252}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.21348, y: 0.7679002, z: 0.36421013}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2663370427814241070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260093410940918252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55023afd2c944e479ef1985404bd564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialBossCommonSwordAttackChargedgenerator
+  spawner: {fileID: 0}
+  target: {fileID: 0}
+  difficulty: 0.2
+  WindupAnimation: {fileID: 7400000, guid: 6fe29a9d2c716d545a899bd26210fbbd, type: 2}
+  WindupAnimationPlaySpeed: -1
+  AttackAnimation: {fileID: 7400000, guid: 7372063a04534934f92516703581276d, type: 2}
+  AttackAnimationPlaySpeed: -1
+  soundHintTime: 0.5
+  soundSpaceTime: 0.2
+  ImplicitHintSound: {fileID: 8300000, guid: 565154378554b684a8f1568f182a3209, type: 3}

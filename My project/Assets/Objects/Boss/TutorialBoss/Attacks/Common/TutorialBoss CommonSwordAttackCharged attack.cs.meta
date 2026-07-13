@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4bca5210350b4994f8ba0ce81b1ac7a9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - parriedSound: {instanceID: 0}
+  - spawner: {instanceID: 0}
+  - target: {instanceID: 0}
+  - AttackGenerator: {instanceID: 0}
+  - trailMaterial: {fileID: 2100000, guid: b58a882357911eb43a915e562527f903, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

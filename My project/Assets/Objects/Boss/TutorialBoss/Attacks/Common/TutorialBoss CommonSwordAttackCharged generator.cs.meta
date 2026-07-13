@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c55023afd2c944e479ef1985404bd564
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spawner: {instanceID: 0}
+  - target: {instanceID: 0}
+  - animationWindup: {instanceID: 0}
+  - animationSlash: {instanceID: 0}
+  - ImplicitHintSound: {fileID: 8300000, guid: 565154378554b684a8f1568f182a3209, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

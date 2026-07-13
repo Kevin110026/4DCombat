@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4936088102553053673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4262179151191921776}
+  - component: {fileID: 4111694495608061856}
+  m_Layer: 0
+  m_Name: TutorialBoss Stage1 Whirlwind generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4262179151191921776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936088102553053673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.1009, y: -0, z: -0.95854}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4111694495608061856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936088102553053673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a72854c3a776ad1458fc86ba560b1b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialBossWhirlwindgenerator
+  spawner: {fileID: 0}
+  target: {fileID: 0}
+  difficulty: 0.2
+  Windup: {fileID: 4936088102553053673, guid: b036aa218fa541e47bc76cf91349babd, type: 3}
+  SpinBegin: {fileID: 4936088102553053673, guid: 92f7175e0e39f8b43af884af0163f599, type: 3}
+  Spinning: {fileID: 4936088102553053673, guid: 556334b7694be2f42a304e4a42d4656d, type: 3}
+  SpinEnd: {fileID: 4936088102553053673, guid: 4ff0c9f9c7fde1f40a52dc37cde8c03f, type: 3}
+  RotationSpeed: 90
+  MoveSpeed: 5

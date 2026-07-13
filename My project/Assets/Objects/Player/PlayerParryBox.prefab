@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6307897133971478665}
   - component: {fileID: 8149849651591014406}
   - component: {fileID: 7961449092292008404}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerParryBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerParryBoxscript
   parryCD: 0.25
+  parryWindow: 0.3
   parryLightObject: {fileID: 8923741070187111660}
+  parrySounds: []
+  playerScript: {fileID: 0}
+  parryEnergyConsume: 1.5
+  isBlocking: 0
+  BlockSoundLight: {fileID: 0}
+  BlockSoundMedium: {fileID: 0}
+  BlockSoundHeavy: {fileID: 0}
+  BlockSoundBreak: {fileID: 0}
 --- !u!54 &7961449092292008404
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -265,7 +274,7 @@ GameObject:
   - component: {fileID: 5687345322471478505}
   - component: {fileID: 6668369779886766018}
   - component: {fileID: 6576755822879571982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ParryLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

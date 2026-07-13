@@ -18,18 +18,51 @@ public class PlayerParryBoxscript : MonoBehaviour
     private LinkedList<float> parryBuffer;
     private float blockBufferTime;
 
+    public PlayerScript playerScript;
+
+    private CharacterScript characterScript;
+    private CharacterStateScript characterStateScript;
+
+    public float parryEnergyConsume = 1.5f;
+
+    [HideInInspector] public bool isBlocking = false;
+
+    public AudioClip BlockSoundLight;
+    public AudioClip BlockSoundMedium;
+    public AudioClip BlockSoundHeavy;
+    public AudioClip BlockSoundBreak;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+
+    /*
+    want to make it like this: 
+    mouse down -> first parry
+    mouse hold -> blocking
+    mouse up after holding for a while -> second parry
+
+    maybe make the logic in PlayerControlScript
+    and here just make Parry and Block
+    */
+
     void Awake()
     {
+        // Debug.Log(playerScript);
+        // Debug.Log(playerScript.characterScript);
+        // Debug.Log(playerScript.characterScript.stateScript);
         audioSource = GetComponent<AudioSource>();
         parryLight = parryLightObject.GetComponent<Light>();
         parryBuffer = new LinkedList<float>();
         blockBufferTime = Time.time - 1000f;
     }
+
     void Start()
     {
+        //  these two run before playerScript is Awaked in Awake, so annoying
+        characterScript = playerScript;
+        characterStateScript = characterScript.stateScript;
+
         parryStart = Time.time - 100.0f;
         parryCDend = Time.time - 100.0f;
     }
@@ -63,10 +96,11 @@ public class PlayerParryBoxscript : MonoBehaviour
 
     bool TryToParry(float parryTime)
     {
-        if (parryTime >= parryCDend)
+        if (parryTime >= parryCDend && characterStateScript.BurstEnergy >= parryEnergyConsume)
         {
             parryStart = parryTime;
             parryCDend = parryStart + parryWindow + parryCD;
+            characterScript.ConsumeBurstEnergy(parryEnergyConsume);
             return true;
         }
         else
@@ -86,28 +120,42 @@ public class PlayerParryBoxscript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Attackscript>(out Attackscript attack))
+        if (other.TryGetComponent<AttackScript>(out AttackScript attack))
         {
             VerifyParryForAttack(attack);
         }
     }
 
-    public bool VerifyParryForAttack(Attackscript attack)
+    public void VerifyParryForAttack(AttackScript attack)
     {
-        if (Time.time <= parryStart + parryWindow && attack.canBeParried)
+        if (attack.canBeParried)
         {
-            OnParry(attack);
-            attack.OnParried(transform.parent.gameObject);
-            return true;
-        }
-        else
-        {
-            return false;
+            if (Time.time <= parryStart + parryWindow)
+            {
+                OnParry(attack);
+            }
+            else if (isBlocking)
+            {
+                BlockAttack(attack);
+            }
         }
     }
 
-    void OnParry(Attackscript attack)
+    void OnParry(AttackScript attack)
     {
+        float parryEnergy = parryEnergyConsume * Mathf.Lerp(7f, 2.5f, (Time.time - parryStart) / parryWindow);
+        attack.energy = Mathf.Max(0, attack.energy - parryEnergy);
+        if (attack.energy == 0)
+        {
+            attack.OnParried(transform.parent.gameObject);
+            parryLight.color = Color.white;
+        }
+        else
+        {
+            BlockAttack(attack);
+            parryLight.color = Color.orange;
+        }
+
         audioSource.pitch = attack.parriedPitch;
         if (attack.parriedSound != null)
             audioSource.PlayOneShot(attack.parriedSound);
@@ -118,6 +166,8 @@ public class PlayerParryBoxscript : MonoBehaviour
         parryLight.intensity = 100f;
         TryToParryFromBuffer();
     }
+
+
     public void ResetBufferAndCd()
     {
         parryBuffer.Clear();
@@ -126,8 +176,44 @@ public class PlayerParryBoxscript : MonoBehaviour
         blockBufferTime = Time.time + 0.1f;
     }
 
+    public void StartBlocking()
+    {
+        isBlocking = true;
+    }
+
+    public void EndBlocking()
+    {
+        isBlocking = false;
+    }
+
+    public void BlockAttack(AttackScript attack)
+    {
+        float energyAvailable = characterStateScript.BurstEnergy;
+        float energyConsume = Mathf.Min(energyAvailable, attack.energy * 2.5f);
+        attack.energy -= energyConsume / 2.5f;
+        characterScript.ConsumeBurstEnergy(energyConsume);
+
+        float BurstEnergyMax = characterStateScript.BurstEnergyMax;
+        if (energyConsume <= 0.2f * BurstEnergyMax)
+            audioSource.PlayOneShot(BlockSoundLight);
+        else if (energyConsume <= 0.4f * BurstEnergyMax)
+            audioSource.PlayOneShot(BlockSoundMedium);
+        else
+            audioSource.PlayOneShot(BlockSoundHeavy);
+
+        if (attack.energy == 0)
+            attack.OnParried(characterScript.gameObject);
+        else
+            audioSource.PlayOneShot(BlockSoundBreak);
+
+    }
     public bool IsParrying()
     {
         return Time.time <= parryStart + parryWindow;
+    }
+
+    public bool IsUsingSword()
+    {
+        return isBlocking || IsParrying();
     }
 }

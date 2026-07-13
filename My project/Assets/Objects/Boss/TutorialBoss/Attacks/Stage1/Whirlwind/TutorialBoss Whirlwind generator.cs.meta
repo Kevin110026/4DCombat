@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a72854c3a776ad1458fc86ba560b1b85
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spawner: {instanceID: 0}
+  - target: {instanceID: 0}
+  - Windup: {fileID: 4936088102553053673, guid: b036aa218fa541e47bc76cf91349babd, type: 3}
+  - SpinBegin: {fileID: 4936088102553053673, guid: 92f7175e0e39f8b43af884af0163f599, type: 3}
+  - Spinning: {fileID: 4936088102553053673, guid: 556334b7694be2f42a304e4a42d4656d, type: 3}
+  - SpinEnd: {fileID: 4936088102553053673, guid: 4ff0c9f9c7fde1f40a52dc37cde8c03f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
