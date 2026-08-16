@@ -61,6 +61,10 @@ public class PlayerControlScript : MonoBehaviour
         {
             playerScript.NormalSlash();
         }
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            playerScript.DashSlash();
+        }
     }
 
     void LateUpdate()
@@ -70,6 +74,9 @@ public class PlayerControlScript : MonoBehaviour
 
     void HandlePlayerRotation()
     {
+        if (!playerScript.canTurn)
+            return;
+            
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
         float mouseX = mouseDelta.x * mouseSensitivity;
         transform.Rotate(0, mouseX, 0);
@@ -79,6 +86,9 @@ public class PlayerControlScript : MonoBehaviour
 
     void HandlePlayerMovement()
     {
+        if (!playerScript.canMove)
+            return;
+
         float moveX = 0f;
         float moveZ = 0f;
 

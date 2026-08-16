@@ -47,6 +47,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   target: {fileID: 0}
   difficulty: 0.2
+  maxEnergyCost: 19
   LeftHit: {fileID: 8837820597012976540, guid: 72665b808941f7041943c83a06516b2a, type: 3}
   RightHit: {fileID: 3112183309236842735, guid: 2208673aeb410b8428af77e029fdf328, type: 3}
   ThrustHitCharged: {fileID: 3112183309236842735, guid: 86105e8d8809fd649941c6d6f142d2e3, type: 3}

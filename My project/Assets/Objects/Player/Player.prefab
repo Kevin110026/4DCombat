@@ -629,6 +629,7 @@ MonoBehaviour:
   attackBox: {fileID: 8713974736529861636}
   Attacks:
   - {fileID: 1704003054183625689, guid: c2d2325c812a1294eb8ac09fdc9a3f1b, type: 3}
+  - {fileID: 5949954410094436960, guid: b500badc4efb5da4786665c8360bc10b, type: 3}
 --- !u!1 &8706630689029570055
 GameObject:
   m_ObjectHideFlags: 0

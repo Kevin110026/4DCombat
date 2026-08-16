@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3980579002624938825}
-  - component: {fileID: -3363733437827853048}
+  - component: {fileID: 1625755164398222471}
   m_Layer: 0
   m_Name: TutorialBoss Stage1 SingleHit Thrust Charged generator
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3363733437827853048
+--- !u!114 &1625755164398222471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,16 +41,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3112183309236842735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c55023afd2c944e479ef1985404bd564, type: 3}
+  m_Script: {fileID: 11500000, guid: d6159247daecdda47831f93252fa56b7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TutorialBossCommonSwordAttackChargedgenerator
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialBossStage1SingleHitThrustChargedgenerator
   spawner: {fileID: 0}
   target: {fileID: 0}
   difficulty: 0.2
+  maxEnergyCost: 10
   WindupAnimation: {fileID: 7400000, guid: f930fab61902efe42829da5f0b8bf243, type: 2}
   WindupAnimationPlaySpeed: -1
   AttackAnimation: {fileID: 7400000, guid: dc22a202fa7eefe4fa289d954a177cff, type: 2}
   AttackAnimationPlaySpeed: -1
   soundHintTime: 0.5
   soundSpaceTime: 0.2
-  ImplicitHintSound: {fileID: 8300000, guid: 565154378554b684a8f1568f182a3209, type: 3}
+  windupTime: 0.27
+  ImplicitHintSound: {fileID: 8300000, guid: a2ad988219f41254db98f24201083f3c, type: 3}
+  attPerfab: {fileID: 856197513940346926, guid: cfc5b15a3358f5c40893267f56ca6b1f, type: 3}

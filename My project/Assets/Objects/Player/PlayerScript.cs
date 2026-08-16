@@ -14,6 +14,9 @@ public class PlayerScript : CharacterScript
     public GameObject attackBox;
     public GameObject[] Attacks;
 
+    [HideInInspector] public bool canMove = true;
+    [HideInInspector] public bool canTurn = true;
+
     GameObject currentAttack;
 
     Animator animator;
@@ -67,6 +70,12 @@ public class PlayerScript : CharacterScript
         {
             animatorStallTime = 0;
         }
+
+        if (currentAttack == null)
+        {
+            canMove = true;
+            canTurn = true;
+        }
     }
 
 
@@ -75,6 +84,14 @@ public class PlayerScript : CharacterScript
         if (SwordCanAttack())
         {
             currentAttack = InstantiateAttack(Attacks[0]);
+        }
+    }
+
+    public void DashSlash()
+    {
+        if (SwordCanAttack() && Attacks[1].GetComponent<AttackGenerator>().maxEnergyCost <= stateScript.BurstEnergy)
+        {
+            currentAttack = InstantiateAttack(Attacks[1]);
         }
     }
 

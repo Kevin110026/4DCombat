@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7878755565497482301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4853461336635328194}
+  - component: {fileID: -3740477582578033934}
+  m_Layer: 0
+  m_Name: TutorialBoss GroundBurst generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4853461336635328194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7878755565497482301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.53861, y: 0, z: -2.4838}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3740477582578033934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7878755565497482301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc85b70ceffc0dc46bd5f3ffbeadd085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialBossGroundBurstgenerator
+  spawner: {fileID: 0}
+  target: {fileID: 0}
+  difficulty: 0.2
+  maxEnergyCost: 30
+  windupTime: 2.5
+  ImplicitHintSound: {fileID: 8300000, guid: a2ad988219f41254db98f24201083f3c, type: 3}
+  slashWindow: 0.3
+  waveNormalizedSpeed: 14
+  waveNormalizedLength: 14
+  attackPerfab: {fileID: 7296627292406682208, guid: 0fea514a56b902447a72a41a82160485, type: 3}
+  attackedPlayerThisTick: 0
+  WindupAnim: {fileID: 7400000, guid: 2463b475a42683647acc3ab03174cbb8, type: 2}
+  SlashAnim: {fileID: 7400000, guid: 702049ff33faf6e45bf0e0dc5e2b29ed, type: 2}

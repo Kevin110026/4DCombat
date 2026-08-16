@@ -19,27 +19,26 @@ public class TutorialBossCommonSwordAttackChargedattack : TutorialBossAttackAtta
         swordTrail.ActivateAll();
     }
 
-    int possCnt = 0;
+    Vector3 lastPos;
+    Quaternion lastRot;
 
     protected override void Update()
     {
         base.Update();
-        int possCntNew = swordTrail.trailRenderer.positionCount;
-        while (possCnt < possCntNew)
+        Vector3 curPos = blade.transform.position;
+        Quaternion curRot = blade.transform.rotation;
+        if (lastPos != null)
         {
-            possCnt++;
-            if (possCnt == 1)
-                continue;
-            Vector3 s = swordTrail.trailRenderer.GetPosition(possCnt - 2);
-            Vector3 e = swordTrail.trailRenderer.GetPosition(possCnt - 1);
-            Vector3 dir = e - s;
-            RaycastHit[] hits = Physics.BoxCastAll(s, blade_scale / 2, dir, Quaternion.LookRotation(dir), dir.magnitude);
+            Vector3 dir = curPos - lastPos;
+            RaycastHit[] hits = Physics.BoxCastAll(lastPos, blade_scale / 2, dir, lastRot, dir.magnitude);
             System.Array.Sort(hits, (hit1, hit2) => hit1.distance.CompareTo(hit2.distance));
             foreach (RaycastHit hit in hits)
             {
                 OnTriggerEnter(hit.collider);
             }
         }
+        lastPos = curPos;
+        lastRot = curRot;
     }
 
 

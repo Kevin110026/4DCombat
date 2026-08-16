@@ -70,9 +70,7 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
     protected virtual IEnumerator Attack()
     {
 
-        TutorialBossCommonSwordAttackattack attack = blade.AddComponent<TutorialBossCommonSwordAttackattack>();
-        attack.spawner = spawner;
-        attack.target = target;
+        TutorialBossCommonSwordAttackattack attack = InstantiateAttack<TutorialBossCommonSwordAttackattack>(blade);
         attack.energy = 4.5f;
         tutorialBossScript.ConsumeBurstEnergy(4.5f);
 

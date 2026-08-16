@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class AttackGenerator : MonoBehaviour
@@ -10,16 +12,23 @@ public class AttackGenerator : MonoBehaviour
     [HideInInspector] public GameObject spawner;
     [HideInInspector] public GameObject target;
     public float difficulty = 0.2f;
+    public float maxEnergyCost = 0;
+    private Coroutine startAttack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
-        StartCoroutine(StartAttack());
+        startAttack = StartCoroutine(StartAttack());
     }
 
     protected virtual void Update()
     {
 
+    }
+
+    void OnDestroy()
+    {
+        StopCoroutine(startAttack);
     }
 
     protected virtual IEnumerator StartAttack()
@@ -48,10 +57,26 @@ public class AttackGenerator : MonoBehaviour
     }
     public T InstantiateAttack<T>(GameObject obj) where T : AttackScript
     {
-        T gen = obj.AddComponent<T>();
-        gen.spawner = spawner;
-        gen.target = target;
-        return gen;
+        T att = obj.AddComponent<T>();
+        att.spawner = spawner;
+        att.target = target;
+        att.AttackGenerator = this;
+        return att;
+    }
+    public GameObject InstantiateAttack(UnityEngine.Object perfab)
+    {
+        GameObject attObj = (GameObject)Instantiate(perfab);
+        if (attObj.TryGetComponent<AttackScript>(out AttackScript attScr))
+        {
+            attScr.spawner = spawner;
+            attScr.target = target;
+            attScr.AttackGenerator = this;
+        }
+        else
+        {
+            Debug.LogError("the perfab '" + perfab + "' does not contain AttackScript!");
+        }
+        return attObj;
     }
 
     protected AnimatorStateInfo animatorStateInfo;

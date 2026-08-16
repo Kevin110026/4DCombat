@@ -12,32 +12,36 @@ public class TutorialBossStage1SequanceCommonAttackChargedgenerator : TutorialBo
         GameObject currentAttackGenerator;
 
         currentAttackGenerator = InstantiateGenerator(LeftHit);
-        while (currentAttackGenerator != null)
-            yield return null;
+        // while (currentAttackGenerator != null)
+        //     yield return null;
+        yield return new WaitForSeconds(0.6f);
 
         // yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(Random.Range(0.0f, 0.6f));
+        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
 
         currentAttackGenerator = InstantiateGenerator(RightHit);
-        while (currentAttackGenerator != null)
-            yield return null;
+        // while (currentAttackGenerator != null)
+        //     yield return null;
+        yield return new WaitForSeconds(0.6f);
 
         // yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(Random.Range(0.0f, 0.6f));
+        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
 
         currentAttackGenerator = InstantiateGenerator(DownHit);
-        while (currentAttackGenerator != null)
-            yield return null;
+        // while (currentAttackGenerator != null)
+        //     yield return null;
+        yield return new WaitForSeconds(0.6f);
 
         // yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(Random.Range(0.0f, 0.6f));
+        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
 
         currentAttackGenerator = InstantiateGenerator(ThrustHit);
-        while (currentAttackGenerator != null)
-            yield return null;
+        // while (currentAttackGenerator != null)
+        //     yield return null;
+        yield return new WaitForSeconds(0.6f);
 
         // yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(Random.Range(0.0f, 0.6f));
+        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
 
         Destroy(gameObject);
     }

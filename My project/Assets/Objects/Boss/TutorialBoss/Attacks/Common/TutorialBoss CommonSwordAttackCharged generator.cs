@@ -8,6 +8,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
 {
     public float soundHintTime = 0.5f;
     public float soundSpaceTime = 0.2f;
+    public float windupTime = 0.27f;
     public AudioClip ImplicitHintSound;
 
     protected bool isWindup = true;
@@ -51,7 +52,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
         GameObject hinter = AttackHinterscript.NewPlayer(ImplicitHintSound, soundHintTime, soundSpaceTime, 0f);
         hinter.transform.parent = spawner.transform;
         hinter.transform.localPosition = Vector3.zero;
-        yield return new WaitForSeconds(0.27f);
+        yield return new WaitForSeconds(windupTime);
         animator.speed = 0f;
         animator.Play(WindupAnimation.name);
         animator.Update(0);
@@ -79,9 +80,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
 
         isSlashing = true;
 
-        TutorialBossCommonSwordAttackChargedattack attack = blade.AddComponent<TutorialBossCommonSwordAttackChargedattack>();
-        attack.spawner = spawner;
-        attack.target = target;
+        TutorialBossCommonSwordAttackChargedattack attack = InstantiateAttack<TutorialBossCommonSwordAttackChargedattack>(blade);
         attack.energy = 4.5f;
         tutorialBossScript.ConsumeBurstEnergy(10f);
 
@@ -100,7 +99,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
 
         isSlashing = false;
 
-        yield return new WaitForSeconds(0.04f);
+        // yield return new WaitForSeconds(0.04f);
         Destroy(attack);
 
         animator.speed = 1;

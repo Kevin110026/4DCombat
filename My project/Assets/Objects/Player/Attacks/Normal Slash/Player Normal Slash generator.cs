@@ -27,6 +27,7 @@ public class PlayerNormalSlashgenerator : PlayerAttackGenerator
         yield return PlayAnimationAndLoop(windup);
         blade.GetComponent<AudioSource>().PlayOneShot(slashSound);
         PlayerNormalSlashattack attack = InstantiateAttack<PlayerNormalSlashattack>(attackBox);
+        attack.energy = 2f;
         yield return PlayAnimationAndLoop(slash);
         yield return new WaitForSeconds(0.16f);
         Destroy(attack);

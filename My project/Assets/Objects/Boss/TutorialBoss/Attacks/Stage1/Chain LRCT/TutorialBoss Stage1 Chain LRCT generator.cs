@@ -21,7 +21,7 @@ public class TutorialBossStage1ChainLRCTgenerator : TutorialBossAttackGenerator
         hitTime += hitTimes[type][0];
         StartCoroutine(HitAfterSecond(hitTime, RightHit, 1.2f, 2.0f));
         hitTime += hitTimes[type][1];
-        yield return StartCoroutine(HitAfterSecond(hitTime, ThrustHitCharged, 4f, 10f, 0.5f, 0.2f));
+        yield return StartCoroutine(HitAfterSecond(hitTime, ThrustHitCharged, 4f, 10f, 0.5f, 0.2f, Random.Range(0.20f, 0.45f)));
 
         Destroy(gameObject);
     }
@@ -47,7 +47,7 @@ public class TutorialBossStage1ChainLRCTgenerator : TutorialBossAttackGenerator
             yield return null;
 
     }
-    IEnumerator HitAfterSecond(float seconds, Object attackGenObj, float WindupSpeed, float AttackSpeed, float HintTime, float SpaceTime)
+    IEnumerator HitAfterSecond(float seconds, Object attackGenObj, float WindupSpeed, float AttackSpeed, float HintTime, float SpaceTime, float windupTime)
     {
         float offset = seconds;
         TutorialBossAnimatedAttack attack = attackGenObj.GetComponent<TutorialBossAnimatedAttack>();
@@ -68,6 +68,7 @@ public class TutorialBossStage1ChainLRCTgenerator : TutorialBossAttackGenerator
         curGen.AttackAnimationPlaySpeed = AttackSpeed;
         curGen.soundHintTime = HintTime;
         curGen.soundSpaceTime = SpaceTime;
+        curGen.windupTime = windupTime;
         while (curGenObj != null)
             yield return null;
 

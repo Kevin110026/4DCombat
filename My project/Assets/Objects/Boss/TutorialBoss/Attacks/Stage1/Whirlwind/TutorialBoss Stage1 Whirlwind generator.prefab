@@ -47,6 +47,11 @@ MonoBehaviour:
   spawner: {fileID: 0}
   target: {fileID: 0}
   difficulty: 0.2
+  maxEnergyCost: 25
+  WindupAnimation: {fileID: 0}
+  WindupAnimationPlaySpeed: -1
+  AttackAnimation: {fileID: 0}
+  AttackAnimationPlaySpeed: -1
   Windup: {fileID: 4936088102553053673, guid: b036aa218fa541e47bc76cf91349babd, type: 3}
   SpinBegin: {fileID: 4936088102553053673, guid: 92f7175e0e39f8b43af884af0163f599, type: 3}
   Spinning: {fileID: 4936088102553053673, guid: 556334b7694be2f42a304e4a42d4656d, type: 3}

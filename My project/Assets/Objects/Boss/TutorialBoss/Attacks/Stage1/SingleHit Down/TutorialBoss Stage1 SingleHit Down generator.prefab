@@ -47,5 +47,9 @@ MonoBehaviour:
   spawner: {fileID: 0}
   target: {fileID: 0}
   difficulty: 0.2
+  maxEnergyCost: 4.5
   WindupAnimation: {fileID: 7400000, guid: 6fe29a9d2c716d545a899bd26210fbbd, type: 2}
+  WindupAnimationPlaySpeed: -1
   AttackAnimation: {fileID: 7400000, guid: 7372063a04534934f92516703581276d, type: 2}
+  AttackAnimationPlaySpeed: -1
+  WindupStallTime: 0

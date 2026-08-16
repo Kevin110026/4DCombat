@@ -37,6 +37,8 @@ public class TutorialBossWhirlwindgenerator : TutorialBossAnimatedAttack
         SwordTrail swordTrail = sword.transform.Find("trail").GetComponent<SwordTrail>();
         swordTrail.ActivateNormal();
 
+        tutorialBossScript.ConsumeBurstEnergy(25f);
+
         GameObject spinBegin = InstantiateGenerator(SpinBegin);
         while (spinBegin != null)
             yield return null;
