@@ -94,6 +94,13 @@ public class PlayerScript : CharacterScript
             currentAttack = InstantiateAttack(Attacks[1]);
         }
     }
+    public void Heal()
+    {
+        if (SwordCanAttack() && Attacks[2].GetComponent<AttackGenerator>().maxEnergyCost <= stateScript.BurstEnergy)
+        {
+            currentAttack = InstantiateAttack(Attacks[2]);
+        }
+    }
 
     public void Parry()
     {
@@ -123,7 +130,7 @@ public class PlayerScript : CharacterScript
         parry.EndBlocking();
     }
 
-    public void OnDamage()
+    public void OnDamage(float damage)
     {
         audioSource.PlayOneShot(DamagedSound);
         parry.ResetBufferAndCd();

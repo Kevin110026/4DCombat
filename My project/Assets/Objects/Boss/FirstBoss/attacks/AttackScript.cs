@@ -14,6 +14,9 @@ public class AttackScript : MonoBehaviour
     [HideInInspector] public GameObject target;
     [HideInInspector] public AttackGenerator AttackGenerator;
 
+    [HideInInspector] public Vector3 knockbackDir = Vector3.zero;
+    public float knockbackMag = 0;
+
     protected virtual void Start()
     {
 
@@ -33,10 +36,17 @@ public class AttackScript : MonoBehaviour
         haveDamaged = true;
         canBeParried = false;
         canDamage = false;
+
+        CharacterController characterController = character.GetComponent<CharacterController>();
+        characterController.Move(knockbackMag * knockbackDir.normalized);
+        // Debug.Log(knockbackMag * knockbackDir);
     }
     public virtual void OnParried(GameObject parrier)
     {
         canDamage = false;
         canBeParried = false;
+
+        CharacterController characterController = parrier.GetComponent<CharacterController>();
+        characterController.Move(0.3f * knockbackMag * knockbackDir.normalized);
     }
 }

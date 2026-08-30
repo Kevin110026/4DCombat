@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &380407403238371811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5816845136580792517}
+  - component: {fileID: 1294394497649363844}
+  m_Layer: 0
+  m_Name: TrainDummy NormalHit generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5816845136580792517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380407403238371811}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.41765, y: 1.94419, z: 23.62888}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1294394497649363844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380407403238371811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefa972a34859a24ab165411126f40af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrainDummyNormalHitgenerator
+  spawner: {fileID: 0}
+  target: {fileID: 0}
+  difficulty: 0.2
+  maxEnergyCost: 0
+  AttackPrefab: {fileID: 5407652635072165349, guid: 9c20b09aa833be44b9c8dd0ed3654184, type: 3}
+  slashSound: {fileID: 8300000, guid: fb43d8d3dae65d144ab55946232a836d, type: 3}
+  WindupAnim: {fileID: 7400000, guid: 1393a1b2198a8264da26d0bf073e36af, type: 2}
+  SlashAnim: {fileID: 7400000, guid: 5008833b2bc20e74faebc5639ee3255d, type: 2}
+  EndAnim: {fileID: 7400000, guid: 19e2c822c4524624abb3419110847cc7, type: 2}

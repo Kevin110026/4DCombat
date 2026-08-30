@@ -17,7 +17,7 @@ public class TutorialBossStage1SequanceCommonAttackChargedgenerator : TutorialBo
         yield return new WaitForSeconds(0.6f);
 
         // yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
+        yield return new WaitForSeconds(0.2f * Random.Range(0, 2));
 
         currentAttackGenerator = InstantiateGenerator(RightHit);
         // while (currentAttackGenerator != null)
@@ -25,7 +25,7 @@ public class TutorialBossStage1SequanceCommonAttackChargedgenerator : TutorialBo
         yield return new WaitForSeconds(0.6f);
 
         // yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
+        yield return new WaitForSeconds(0.2f * Random.Range(0, 2));
 
         currentAttackGenerator = InstantiateGenerator(DownHit);
         // while (currentAttackGenerator != null)
@@ -33,7 +33,7 @@ public class TutorialBossStage1SequanceCommonAttackChargedgenerator : TutorialBo
         yield return new WaitForSeconds(0.6f);
 
         // yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
+        yield return new WaitForSeconds(0.2f * Random.Range(0, 2));
 
         currentAttackGenerator = InstantiateGenerator(ThrustHit);
         // while (currentAttackGenerator != null)
@@ -41,7 +41,7 @@ public class TutorialBossStage1SequanceCommonAttackChargedgenerator : TutorialBo
         yield return new WaitForSeconds(0.6f);
 
         // yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
+        yield return new WaitForSeconds(0.2f * Random.Range(0, 2));
 
         Destroy(gameObject);
     }

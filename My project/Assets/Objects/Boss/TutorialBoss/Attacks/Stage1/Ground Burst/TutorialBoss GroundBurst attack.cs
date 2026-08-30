@@ -11,6 +11,7 @@ public class TutorialBossGroundBurstattack : TutorialBossAttackAttack
         base.Start();
         endTime = Time.time + duration;
         generator = AttackGenerator.GetComponent<TutorialBossGroundBurstgenerator>();
+        knockbackDir = Vector3.up;
     }
 
     protected override void Update()

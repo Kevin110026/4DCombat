@@ -16,6 +16,7 @@ public class TutorialBossStage1SingleHitThrustChargedgenerator : TutorialBossCom
     {
         GameObject attObj = InstantiateAttack(attPerfab);
         attObj.GetComponent<TutorialBossStage1SingleHitThrustChargedattack>().energy = 4.5f;
+        attObj.GetComponent<TutorialBossStage1SingleHitThrustChargedattack>().knockbackMag = knockbackMag;
         tutorialBossScript.ConsumeBurstEnergy(10f);
 
         animator.speed = WindupAnimationPlaySpeed;

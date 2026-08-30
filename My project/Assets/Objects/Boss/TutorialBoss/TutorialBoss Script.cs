@@ -1,12 +1,17 @@
+using System.Collections;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore;
 
+[RequireComponent(typeof(Animator))]
 public class TutorialBossScript : CharacterScript
 {
     public Object[] attacks;
+    public int[] attacksWeights = { };
     public Object[] movements;
+    public Object KnockedAnim;
     public GameObject target;
     public GameObject sword;
     public GameObject blade;
@@ -18,8 +23,16 @@ public class TutorialBossScript : CharacterScript
     public float difficulty = 0.2f;
     public AudioClip DamagedSound;
     [SerializeField] float RandomAttackCD;
-    private bool autoAttack = false;
+    [SerializeField] public bool autoAttack = false;
     private AudioSource audioSource;
+    [SerializeField] int stage = 0;
+    private int[] stageAttackCount = { 5, 11, 999 };
+    [SerializeField] int[] stageHp = { 200, 300, 600 };
+    [SerializeField] int[] stageEnergyMax = { 20, 50, 70 };
+    [SerializeField] int[] stageAttackActive = { 18, 40, 60 };
+    [SerializeField] int[] stageEnergyRecovery = { 6, 16, 28 };
+    private bool knocked = false;
+    [HideInInspector] public bool start = false;
 
     Animator animator;
     protected override void Awake()
@@ -34,20 +47,65 @@ public class TutorialBossScript : CharacterScript
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        stateScript.HpMax = stageHp[stage];
+        stateScript.Hp = stateScript.HpMax;
+        stateScript.BurstEnergyMax = stageEnergyMax[stage];
+        stateScript.BurstEnergy = stateScript.BurstEnergyMax;
+
+        lastHp = stateScript.Hp;
     }
 
     // Update is called once per frame
     override protected void Update()
     {
         base.Update();
+        if (!start)
+            return;
+
+        if (!autoAttack && (transform.position - target.transform.position).magnitude <= 6)
+            autoAttack = true;
+
+
         Movement();
         EnergyRecovery();
         ChooseAnAttack();
+
+        if (lastHpCd < Time.time || attackActive)
+        {
+            lastHp = Mathf.Max(lastHp - Time.deltaTime * 20, stateScript.Hp);
+        }
+        if (!knocked && stateScript.Hp <= 0)
+        {
+            Destroy(currentAttackGenerator);
+            currentAttackGenerator = InstantiateAttack(KnockedAnim);
+            knocked = true;
+        }
+        if (knocked && currentAttackGenerator == null)
+        {
+            if (stage < 3)
+            {
+                stage++;
+            }
+            if (stage < 3)
+            {
+                stateScript.HpMax = stageHp[stage];
+                stateScript.Hp = stateScript.HpMax;
+                stateScript.BurstEnergyMax = stageEnergyMax[stage];
+                stateScript.BurstEnergy = stateScript.BurstEnergyMax;
+                knocked = false;
+                attackActive = true;
+            }
+            else
+            {
+                knocked = true;
+                attackActive = false;
+            }
+        }
     }
 
     void Movement()
     {
-        if (currentAttackGenerator == null)
+        if (currentAttackGenerator == null && !knocked)
         {
             if (currentMovementGenerator == null)
                 currentMovementGenerator = InstantiateAttack(movements[0]);
@@ -68,7 +126,8 @@ public class TutorialBossScript : CharacterScript
 
     void EnergyRecovery()
     {
-        float recovery = attackActive == true ? 0 * Time.deltaTime : 16f * Time.deltaTime;
+        float recoveryRate = stage < 3 ? stageEnergyRecovery[stage] : 0;
+        float recovery = attackActive == true ? 0 * Time.deltaTime : recoveryRate * Time.deltaTime;
         stateScript.BurstEnergy = Mathf.Min(stateScript.BurstEnergy + recovery, stateScript.BurstEnergyMax);
     }
 
@@ -110,9 +169,9 @@ public class TutorialBossScript : CharacterScript
 
 
 
-        if (!attackActive)
+        if (!attackActive && !knocked)
         {
-            float threshold = 40f;
+            float threshold = stageAttackActive[stage];
             if (stateScript.BurstEnergy >= threshold)
             {
                 if (Random.Range(0f, 1f) < (stateScript.BurstEnergy - threshold) / (stateScript.BurstEnergyMax - threshold) * Time.deltaTime * 2)
@@ -150,12 +209,13 @@ public class TutorialBossScript : CharacterScript
             }
         }
 
-        Debug.Log("active:" + attackActive + " energy: " + stateScript.BurstEnergy);
+        // Debug.Log("active:" + attackActive + " energy: " + stateScript.BurstEnergy);
     }
 
     bool RandomPickAttack()
     {
-        int i = Random.Range(0, attacks.Length);
+        int size = Mathf.Min(stageAttackCount[stage], attacks.Length);
+        int i = WeightedRNG.Get(attacksWeights.Take(size).ToArray());
         Object attack = attacks[i];
         if (attack.GetComponent<AttackGenerator>().maxEnergyCost <= stateScript.BurstEnergy)
         {
@@ -183,16 +243,29 @@ public class TutorialBossScript : CharacterScript
         return (GameObject)instant;
     }
 
-    public void OnDamage()
+    float lastHp;
+    float lastHpCd = 0;
+    float bigBackOffCd = 0;
+    public void OnDamage(float damage)
     {
+        lastHpCd = Time.time + 2;
         audioSource.PlayOneShot(DamagedSound);
+        // Debug.Log(lastHp - stateScript.Hp);
         if (currentAttackGenerator == null)
         {
             currentAttackGenerator = InstantiateAttack(movements[1]);
+            if (lastHp - stateScript.Hp >= 30 && Time.time > bigBackOffCd)
+            {
+                // Debug.Log("BIG");
+                currentAttackGenerator.GetComponent<TutorialBossMovementBackOff>().BackOffDistance = 15f;
+                // currentAttackGenerator.GetComponent<TutorialBossMovementBackOff>().BackOffAcceleration *= 3f;
+                bigBackOffCd = Time.time + 5f;
+            }
         }
     }
     void OnDestroy()
     {
         OnDamageObservers -= OnDamage;
     }
+
 }

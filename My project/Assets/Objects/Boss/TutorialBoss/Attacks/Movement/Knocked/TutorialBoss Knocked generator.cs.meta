@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c6709b9d40b003a4080ca98dbb451324
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spawner: {instanceID: 0}
+  - target: {instanceID: 0}
+  - KnockedAmimation: {instanceID: 0}
+  - RecoverAmimation: {instanceID: 0}
+  - RecoverSound: {fileID: 8300000, guid: a1eacfe2bb9579447b19b8d109b63934, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

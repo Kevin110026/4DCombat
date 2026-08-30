@@ -190,6 +190,8 @@ MonoBehaviour:
   spawner: {fileID: 0}
   target: {fileID: 0}
   AttackGenerator: {fileID: 0}
+  knockbackDir: {x: 0, y: 0, z: 0}
+  knockbackMag: 0.033333335
   generator: {fileID: 0}
   duration: 1
 --- !u!1 &7328970272271715999

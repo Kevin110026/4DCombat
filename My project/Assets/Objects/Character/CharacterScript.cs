@@ -44,7 +44,7 @@ public class CharacterScript : MonoBehaviour
 
 
 
-    public event Action OnDamageObservers;
+    public event Action<float> OnDamageObservers;
 
     float lastDamageTime;
 
@@ -52,15 +52,15 @@ public class CharacterScript : MonoBehaviour
     {
         stateScript.Hp -= damage;
         lastDamageTime = Time.time;
-        OnDamageObservers?.Invoke();
+        OnDamageObservers?.Invoke(damage);
     }
 
-    public event Action OnHealObservers;
+    public event Action<float> OnHealObservers;
 
     public void Heal(float heal)
     {
         stateScript.Hp += heal;
-        OnHealObservers?.Invoke();
+        OnHealObservers?.Invoke(heal);
     }
     public event Action OnConsumeBurstEnergyObservers;
 

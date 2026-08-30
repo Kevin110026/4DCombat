@@ -26,6 +26,7 @@ public class TutorialBossStage1SingleHitThrustgenerator : TutorialBossCommonSwor
     {
         GameObject attObj = InstantiateAttack(attPerfab);
         attObj.GetComponent<TutorialBossStage1SingleHitThrustattack>().energy = 4.5f;
+        attObj.GetComponent<TutorialBossStage1SingleHitThrustattack>().knockbackMag = knockbackMag;
         tutorialBossScript.ConsumeBurstEnergy(4.5f);
 
         

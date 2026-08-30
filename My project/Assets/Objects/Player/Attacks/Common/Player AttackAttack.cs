@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAttackAttack : AttackScript
@@ -16,5 +17,11 @@ public class PlayerAttackAttack : AttackScript
         blade = playerScript.blade;
         attackBox = playerScript.attackBox;
         base.Start();
+    }
+
+    protected override void DamageCharacter(GameObject character)
+    {
+        playerScript.GetComponent<PlayerControlScript>().cameraScript.ScreenShake();
+        base.DamageCharacter(character);
     }
 }

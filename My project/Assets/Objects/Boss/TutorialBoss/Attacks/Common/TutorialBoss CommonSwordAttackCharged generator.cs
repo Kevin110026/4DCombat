@@ -6,13 +6,14 @@ using UnityEngine.TextCore.Text;
 
 public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimatedAttack
 {
-    public float soundHintTime = 0.5f;
+    public float soundHintTime = -1;
     public float soundSpaceTime = 0.2f;
     public float windupTime = 0.27f;
     public AudioClip ImplicitHintSound;
 
     protected bool isWindup = true;
     protected bool isSlashing = false;
+    public float knockbackMag = 1f;
 
     protected virtual void Awake()
     {
@@ -24,6 +25,15 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
         {
             AttackAnimationPlaySpeed = 4;
         }
+    }
+    protected override void Start()
+    {
+        if (soundHintTime == -1f)
+        {
+            soundHintTime = Random.Range(0, 2) == 0 ? 0.4f : 0.6f;
+            // 0.5f;
+        }
+        base.Start();
     }
 
     protected override IEnumerator StartAttack()
@@ -82,6 +92,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
 
         TutorialBossCommonSwordAttackChargedattack attack = InstantiateAttack<TutorialBossCommonSwordAttackChargedattack>(blade);
         attack.energy = 4.5f;
+        attack.knockbackMag = knockbackMag;
         tutorialBossScript.ConsumeBurstEnergy(10f);
 
 

@@ -15,6 +15,7 @@ public class PlayerControlScript : MonoBehaviour
     [HideInInspector] public PlayerParryBoxscript parry;
     [HideInInspector] public GameObject parryBox;
     [HideInInspector] public GameObject attackBox;
+    [HideInInspector] public CameraScript cameraScript;
     public float playerDashCooldown = 1.0f;
     private AudioSource audioSource;
     public AudioClip dashSound;
@@ -25,6 +26,7 @@ public class PlayerControlScript : MonoBehaviour
         parry = playerScript.parry;
         parryBox = parry.gameObject;
         attackBox = playerScript.attackBox;
+        cameraScript = playerCamera.GetComponent<CameraScript>();
     }
 
     void Start()
@@ -64,6 +66,10 @@ public class PlayerControlScript : MonoBehaviour
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
             playerScript.DashSlash();
+        }
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            playerScript.Heal();
         }
     }
 

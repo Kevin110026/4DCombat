@@ -630,6 +630,9 @@ MonoBehaviour:
   Attacks:
   - {fileID: 1704003054183625689, guid: c2d2325c812a1294eb8ac09fdc9a3f1b, type: 3}
   - {fileID: 5949954410094436960, guid: b500badc4efb5da4786665c8360bc10b, type: 3}
+  - {fileID: 9088839918249689090, guid: cd9c941798d84564c981c86b1a8ea148, type: 3}
+  canMove: 1
+  canTurn: 1
 --- !u!1 &8706630689029570055
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +645,7 @@ GameObject:
   - component: {fileID: 3832284203137625481}
   - component: {fileID: 9100181055847912237}
   - component: {fileID: 6124495664613694696}
+  - component: {fileID: 1924960529005775147}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -782,6 +786,18 @@ ParentConstraint:
   m_Active: 1
   m_IsLocked: 0
   m_Sources: []
+--- !u!114 &1924960529005775147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706630689029570055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63a8c71ed12fea45aaff6206430fb97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraScript
 --- !u!1 &8713974736529861636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,6 +1038,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5687345322471478505, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687345322471478505, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687345322471478505, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687345322471478505, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687345322471478505, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8069171316673787136, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1046,6 +1082,10 @@ PrefabInstance:
       propertyPath: BlockSoundMedium
       value: 
       objectReference: {fileID: 8300000, guid: 4717e99f7f739b546bd24da0cc8cbd5c, type: 3}
+    - target: {fileID: 8149849651591014406, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+      propertyPath: blockEnergyConsumeMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8685803601279635150, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

@@ -9,10 +9,10 @@ public class TutorialBossCommonSwordAttackattack : TutorialBossAttackAttack
         base.Start();
         blade_scale = blade.transform.localScale;
     }
-    
+
     Vector3 lastPos;
     Quaternion lastRot;
-    
+
     protected override void Update()
     {
         base.Update();
@@ -21,6 +21,7 @@ public class TutorialBossCommonSwordAttackattack : TutorialBossAttackAttack
         if (lastPos != null)
         {
             Vector3 dir = curPos - lastPos;
+            knockbackDir = dir;
             RaycastHit[] hits = Physics.BoxCastAll(lastPos, blade_scale / 2, dir, lastRot, dir.magnitude);
             System.Array.Sort(hits, (hit1, hit2) => hit1.distance.CompareTo(hit2.distance));
             foreach (RaycastHit hit in hits)

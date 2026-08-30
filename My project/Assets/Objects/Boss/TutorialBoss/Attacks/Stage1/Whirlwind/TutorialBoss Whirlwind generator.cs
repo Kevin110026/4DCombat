@@ -10,6 +10,7 @@ public class TutorialBossWhirlwindgenerator : TutorialBossAnimatedAttack
     [SerializeField] Object SpinEnd;
     [SerializeField] float RotationSpeed = 90f;
     [SerializeField] float MoveSpeed = 3f;
+    public float knockbackMag = 1f;
     private bool move = false;
     private Quaternion rot;
     protected override void Update()
@@ -40,6 +41,7 @@ public class TutorialBossWhirlwindgenerator : TutorialBossAnimatedAttack
         tutorialBossScript.ConsumeBurstEnergy(25f);
 
         GameObject spinBegin = InstantiateGenerator(SpinBegin);
+        spinBegin.GetComponent<TutorialBossWhirlwindSpinBegin>().knockbackMag = knockbackMag;
         while (spinBegin != null)
             yield return null;
         GameObject spinning = InstantiateGenerator(Spinning);

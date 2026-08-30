@@ -8,6 +8,7 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
 {
     public float WindupStallTime = 0;
     protected bool isWindup = true;
+    public float knockbackMag = 1f;
 
     protected virtual void Awake()
     {
@@ -72,6 +73,7 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
 
         TutorialBossCommonSwordAttackattack attack = InstantiateAttack<TutorialBossCommonSwordAttackattack>(blade);
         attack.energy = 4.5f;
+        attack.knockbackMag = knockbackMag;
         tutorialBossScript.ConsumeBurstEnergy(4.5f);
 
         AudioClip slash_sound = Resources.Load<AudioClip>("dragon-studio-whoosh-motion-405445");

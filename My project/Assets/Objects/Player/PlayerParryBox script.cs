@@ -12,6 +12,7 @@ public class PlayerParryBoxscript : MonoBehaviour
     private float parryCDend;
     public float parryCD = 0.15f;
     public float parryWindow = 0.3f;
+    public float blockEnergyConsumeMultiplier = 2;
     public GameObject parryLightObject;
     private Light parryLight;
     public AudioClip[] parrySounds;
@@ -164,6 +165,7 @@ public class PlayerParryBoxscript : MonoBehaviour
         parryCDend = Time.time - 100 * parryWindow;
         parryStart = Time.time - 100 * parryWindow;
         parryLight.intensity = 100f;
+        playerScript.GetComponent<PlayerControlScript>().cameraScript.ScreenShake();
         TryToParryFromBuffer();
     }
 
@@ -189,8 +191,8 @@ public class PlayerParryBoxscript : MonoBehaviour
     public void BlockAttack(AttackScript attack)
     {
         float energyAvailable = characterStateScript.BurstEnergy;
-        float energyConsume = Mathf.Min(energyAvailable, attack.energy * 2.5f);
-        attack.energy -= energyConsume / 2.5f;
+        float energyConsume = Mathf.Min(energyAvailable, attack.energy * blockEnergyConsumeMultiplier);
+        attack.energy -= energyConsume / blockEnergyConsumeMultiplier;
         characterScript.ConsumeBurstEnergy(energyConsume);
 
         float BurstEnergyMax = characterStateScript.BurstEnergyMax;

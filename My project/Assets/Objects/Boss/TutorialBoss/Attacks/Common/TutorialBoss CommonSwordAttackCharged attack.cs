@@ -30,6 +30,7 @@ public class TutorialBossCommonSwordAttackChargedattack : TutorialBossAttackAtta
         if (lastPos != null)
         {
             Vector3 dir = curPos - lastPos;
+            knockbackDir = dir;
             RaycastHit[] hits = Physics.BoxCastAll(lastPos, blade_scale / 2, dir, lastRot, dir.magnitude);
             System.Array.Sort(hits, (hit1, hit2) => hit1.distance.CompareTo(hit2.distance));
             foreach (RaycastHit hit in hits)

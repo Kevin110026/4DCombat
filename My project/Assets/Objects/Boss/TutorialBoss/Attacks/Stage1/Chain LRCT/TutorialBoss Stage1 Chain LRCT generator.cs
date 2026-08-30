@@ -17,11 +17,11 @@ public class TutorialBossStage1ChainLRCTgenerator : TutorialBossAttackGenerator
     {
         int type = Random.Range(0, 2);
         float hitTime = 0.5f;
-        StartCoroutine(HitAfterSecond(hitTime, LeftHit, 2.0f, 2.0f));
+        StartCoroutine(HitAfterSecond(hitTime, LeftHit, 1.7f, 2.0f));
         hitTime += hitTimes[type][0];
         StartCoroutine(HitAfterSecond(hitTime, RightHit, 1.2f, 2.0f));
         hitTime += hitTimes[type][1];
-        yield return StartCoroutine(HitAfterSecond(hitTime, ThrustHitCharged, 4f, 10f, 0.5f, 0.2f, Random.Range(0.20f, 0.45f)));
+        yield return StartCoroutine(HitAfterSecond(hitTime, ThrustHitCharged, 5f, 10f, 0.3f, 0.3f, 0.27f));
 
         Destroy(gameObject);
     }

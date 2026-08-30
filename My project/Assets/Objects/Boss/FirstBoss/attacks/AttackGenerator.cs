@@ -96,6 +96,7 @@ public class AttackGenerator : MonoBehaviour
                 loopFunction?.Invoke();
             yield return null;
             animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            // Debug.Log("looping " + clip.name + " " + Time.time);
         }
     }
 }
