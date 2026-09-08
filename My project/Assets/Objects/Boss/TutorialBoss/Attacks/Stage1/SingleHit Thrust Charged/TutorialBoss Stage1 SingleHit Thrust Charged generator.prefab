@@ -56,4 +56,6 @@ MonoBehaviour:
   soundSpaceTime: 0.2
   windupTime: 0.27
   ImplicitHintSound: {fileID: 8300000, guid: a2ad988219f41254db98f24201083f3c, type: 3}
+  knockbackMag: 1
+  HintPath: {fileID: 11400000, guid: 9bfaa563364754d4fb2fddc5ac819ff7, type: 2}
   attPerfab: {fileID: 856197513940346926, guid: cfc5b15a3358f5c40893267f56ca6b1f, type: 3}

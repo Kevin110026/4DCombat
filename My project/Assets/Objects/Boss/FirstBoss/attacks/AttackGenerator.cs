@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEditor.VersionControl;
@@ -97,6 +98,33 @@ public class AttackGenerator : MonoBehaviour
             yield return null;
             animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
             // Debug.Log("looping " + clip.name + " " + Time.time);
+        }
+    }
+
+    protected void LoadHintSoundPath(GameObject hinter, GameObject parent, HintSoundPath path, float duration)
+    {
+        StartCoroutine(LoadHintSoundPathIEnumerator(hinter, parent, path, duration));
+    }
+    IEnumerator LoadHintSoundPathIEnumerator(GameObject hinter, GameObject parent, HintSoundPath path, float duration)
+    {
+        hinter.transform.parent = parent.transform;
+        float startTime = Time.time;
+        while (Time.time < startTime + duration)
+        {
+            hinter.transform.localPosition = path.Pos((Time.time - startTime) / duration);
+            yield return null;
+        }
+        hinter.transform.localPosition = path.Pos(1);
+    }
+
+    protected IEnumerator LoopForSeconds(float seconds, Action loopFunction = null)
+    {
+        float start = Time.time;
+        while (Time.time < start + seconds)
+        {
+            if (loopFunction != null)
+                loopFunction?.Invoke();
+            yield return null;
         }
     }
 }

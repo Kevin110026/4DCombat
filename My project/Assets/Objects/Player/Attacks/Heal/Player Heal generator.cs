@@ -18,15 +18,16 @@ public class PlayerHealgenerator : PlayerAttackGenerator
 
         float energyConsumed = 0;
 
-        AttackHinterscript.NewPlayer(HealChargingSound, healTimeFront - 0.1f, 0.1f, 0f);
+        GameObject hintPlayer = AttackHinterscript.NewPlayer(HealChargingSound, healTimeFront - 0.1f, 0.1f, 0f);
+        hintPlayer.transform.parent = spawner.transform;
+        hintPlayer.transform.localPosition = Vector3.zero;
 
         Camera cam = spawner.GetComponent<PlayerControlScript>().playerCamera;
+        CameraScript cameraScript = Camera.allCameras[0].GetComponent<CameraScript>();
         float endTime = Time.time + healTimeFront;
-        float oriFov = cam.fieldOfView;
-        float deltaFov = 12;
+        cameraScript.FovChangeLinear(-12, healTimeFront - 0.1f);
         while (Time.time < endTime)
         {
-            cam.fieldOfView = Mathf.Max(oriFov - deltaFov, cam.fieldOfView - Time.deltaTime * deltaFov / (healTimeFront - 0.1f));
             float eDiff = (Time.time - endTime + healTimeFront) / healTimeFront * energyCost - energyConsumed;
             playerScript.ConsumeBurstEnergy(eDiff);
             energyConsumed += eDiff;
@@ -37,19 +38,13 @@ public class PlayerHealgenerator : PlayerAttackGenerator
 
         playerScript.canMove = true;
 
-        GameObject player = AttackHinterscript.NewPlayer(HealSuccessSound, HealSuccessSound.length, 0f, 0f);
-        player.transform.parent = spawner.transform;
-        player.transform.position = Vector3.zero;
+        hintPlayer = AttackHinterscript.NewPlayer(HealSuccessSound, HealSuccessSound.length, 0f, 0f);
+        hintPlayer.transform.parent = spawner.transform;
+        hintPlayer.transform.localPosition = Vector3.zero;
 
         endTime = Time.time + healTimeBack;
-        deltaFov = 0;
-        while (Time.time < endTime)
-        {
-            cam.fieldOfView = (oriFov + deltaFov) + (cam.fieldOfView - oriFov - deltaFov) * Mathf.Pow(0.02f, Time.deltaTime / healTimeBack);
-            yield return null;
-        }
+        cameraScript.FovChangeLinear(12, healTimeBack);
 
-        cam.fieldOfView = oriFov;
 
         Destroy(gameObject);
     }

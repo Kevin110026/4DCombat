@@ -12,13 +12,13 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
     [HideInInspector] public Vector3? stopPoint = null;
     [HideInInspector] public Vector3 dir;
 
-    
+
     private SwordTrail swordTrail;
 
     protected override void Start()
     {
         base.Start();
-        
+
         swordTrail = sword.transform.Find("trail").GetComponent<SwordTrail>();
     }
 
@@ -26,6 +26,7 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
     {
         playerScript.canMove = false;
         playerScript.canTurn = false;
+        CameraScript cameraScript = Camera.allCameras[0].GetComponent<CameraScript>();
 
         {// calculate attack direction
             Vector3 rot = spawner.transform.rotation.eulerAngles;
@@ -39,26 +40,20 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
 
         AttackHinterscript.NewPlayer(ImplicitHintSound, 0.5f, 0.2f, 0f);
         Camera cam = spawner.GetComponent<PlayerControlScript>().playerCamera;
-        float endTime = Time.time + 0.7f;
-        float oriFov = cam.fieldOfView;
-        float deltaFov = 30;
-        while (Time.time < endTime)
-        {
-            cam.fieldOfView = Mathf.Max(oriFov - deltaFov, cam.fieldOfView - Time.deltaTime * deltaFov / 0.5f);
-            yield return null;
-        }
+        cameraScript.FovChangeLinear(-30, 0.5f);
+        yield return new WaitForSeconds(0.7f);
 
         StartCoroutine(PlayAnimationAndLoop(Slash));
         GameObject attObj = InstantiateAttack(attPrefab);
         attObj.GetComponent<PlayerDashSlashattack>().energy = 4.5f;
         swordTrail.ActivateAll();
 
-        endTime = Time.time + 0.4f;
-        deltaFov = 20f;
+
+        cameraScript.FovChangeQuadratic(40, 0.4f);
+        float endTime = Time.time + 0.4f;
         while (stopPoint == null && Time.time < endTime)
         {
             spawner.GetComponent<CharacterController>().Move(speed * Time.deltaTime * dir);
-            cam.fieldOfView = (oriFov + deltaFov) + (cam.fieldOfView - oriFov - deltaFov) * Mathf.Pow(0.03f, Time.deltaTime);
             yield return null;
         }
         if (stopPoint != null)
@@ -67,16 +62,10 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
         playerScript.canMove = true;
         playerScript.canTurn = true;
 
-        endTime = Time.time + 0.4f;
-        deltaFov = 0;
-        while (Time.time < endTime)
-        {
-            cam.fieldOfView = (oriFov + deltaFov) + (cam.fieldOfView - oriFov - deltaFov) * Mathf.Pow(0.02f, Time.deltaTime);
-            yield return null;
-        }
+        cameraScript.FovChangeQuadratic(-10, 0.4f);
+        yield return new WaitForSeconds(0.4f);
 
         animator.speed = 1f;
-        cam.fieldOfView = oriFov;
         Destroy(attObj);
         Destroy(gameObject);
 

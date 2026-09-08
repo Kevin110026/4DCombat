@@ -42,5 +42,6 @@ public class PlayerDashSlashattack : PlayerAttackAttack
     {
         damage = energy * 8;
         base.DamageCharacter(character);
+        
     }
 }

@@ -586,6 +586,7 @@ MonoBehaviour:
   parry: {fileID: 0}
   parryBox: {fileID: 0}
   attackBox: {fileID: 0}
+  cameraScript: {fileID: 0}
   playerDashCooldown: 1
   dashSound: {fileID: 8300000, guid: 26c9f2aa4459e0547abaf2632e99628a, type: 3}
 --- !u!95 &6170599700074712284
@@ -631,8 +632,10 @@ MonoBehaviour:
   - {fileID: 1704003054183625689, guid: c2d2325c812a1294eb8ac09fdc9a3f1b, type: 3}
   - {fileID: 5949954410094436960, guid: b500badc4efb5da4786665c8360bc10b, type: 3}
   - {fileID: 9088839918249689090, guid: cd9c941798d84564c981c86b1a8ea148, type: 3}
+  - {fileID: 5837643614880094291, guid: fd07b4dad3a7a924ab2b71f22976b37c, type: 3}
   canMove: 1
   canTurn: 1
+  canAct: 1
 --- !u!1 &8706630689029570055
 GameObject:
   m_ObjectHideFlags: 0

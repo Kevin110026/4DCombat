@@ -49,5 +49,7 @@ public class PlayerNormalSlashattack : PlayerAttackAttack
         base.DamageCharacter(character);
         pushDir = (spawner.transform.position - character.transform.position).normalized;
         pushTimeRemain = PushTimeLen;
+
+       
     }
 }

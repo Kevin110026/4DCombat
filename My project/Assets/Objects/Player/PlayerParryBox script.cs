@@ -72,7 +72,7 @@ public class PlayerParryBoxscript : MonoBehaviour
     void Update()
     {
         UpdateParry();
-        parryLight.intensity = (float)Math.Clamp(parryLight.intensity * Math.Pow(0.01, Time.deltaTime / 0.1f), 0, float.PositiveInfinity);
+        parryLight.intensity = (float)Math.Clamp(parryLight.intensity * Math.Pow(0.05, Time.deltaTime / 0.1f), 0, float.PositiveInfinity);
     }
 
     void UpdateParry()
@@ -145,7 +145,8 @@ public class PlayerParryBoxscript : MonoBehaviour
     void OnParry(AttackScript attack)
     {
         float parryEnergy = parryEnergyConsume * Mathf.Lerp(7f, 2.5f, (Time.time - parryStart) / parryWindow);
-        attack.energy = Mathf.Max(0, attack.energy - parryEnergy);
+        float parriedEnergy = Mathf.Min(attack.energy, parryEnergy);
+        attack.energy -= parriedEnergy;
         if (attack.energy == 0)
         {
             attack.OnParried(transform.parent.gameObject);
@@ -164,8 +165,9 @@ public class PlayerParryBoxscript : MonoBehaviour
             audioSource.PlayOneShot(audioSource.clip);
         parryCDend = Time.time - 100 * parryWindow;
         parryStart = Time.time - 100 * parryWindow;
-        parryLight.intensity = 100f;
-        playerScript.GetComponent<PlayerControlScript>().cameraScript.ScreenShake();
+        parryLight.intensity = parriedEnergy * 40;
+        Debug.Log(parryLight.intensity);
+        playerScript.GetComponent<PlayerControlScript>().cameraScript.ScreenShakeFov();
         TryToParryFromBuffer();
     }
 
@@ -207,6 +209,10 @@ public class PlayerParryBoxscript : MonoBehaviour
             attack.OnParried(characterScript.gameObject);
         else
             audioSource.PlayOneShot(BlockSoundBreak);
+
+        float f = 8 * (1 + energyConsume * 0.02f);
+        playerScript.cameraScript.ScreenShakeRotSHM((UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1) * Mathf.Sqrt(energyConsume) * 0.5f, f, 2f, f * Mathf.Lerp(0.05f, 0.12f, energyConsume * 0.02f));
+
 
     }
     public bool IsParrying()

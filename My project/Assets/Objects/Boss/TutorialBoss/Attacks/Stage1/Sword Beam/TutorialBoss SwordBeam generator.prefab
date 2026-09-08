@@ -59,3 +59,5 @@ MonoBehaviour:
   windowTime: 0.2
   slashTime: 0.2
   coolDownTime: 0.1
+  leftHintPath: {fileID: 11400000, guid: a1017837279671f448ef0e10249c5a09, type: 2}
+  rightHintPath: {fileID: 11400000, guid: c1d91789b28fa9847b6838b8866daac7, type: 2}

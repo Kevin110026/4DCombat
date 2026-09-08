@@ -56,3 +56,5 @@ MonoBehaviour:
   soundSpaceTime: 0.2
   windupTime: 0.27
   ImplicitHintSound: {fileID: 8300000, guid: 565154378554b684a8f1568f182a3209, type: 3}
+  knockbackMag: 1
+  HintPath: {fileID: 11400000, guid: a9fc2fd67415ca44e94cac7cd02a0703, type: 2}

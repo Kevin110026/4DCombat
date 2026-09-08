@@ -16,10 +16,13 @@ public class PlayerScript : CharacterScript
 
     [HideInInspector] public bool canMove = true;
     [HideInInspector] public bool canTurn = true;
+    [HideInInspector] public bool canAct = true;
+    [HideInInspector] public bool defeated = false;
 
     GameObject currentAttack;
 
     Animator animator;
+    [HideInInspector] public CameraScript cameraScript;
 
 
 
@@ -32,6 +35,7 @@ public class PlayerScript : CharacterScript
         attackBox = transform.Find("PlayerAttackBox").gameObject;
         sword = transform.Find("Sword").gameObject;
         blade = sword.transform.Find("blade").gameObject;
+        cameraScript = GetComponent<PlayerControlScript>().playerCamera.GetComponent<CameraScript>();
         OnDamageObservers += OnDamage;
     }
 
@@ -43,6 +47,7 @@ public class PlayerScript : CharacterScript
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -75,6 +80,13 @@ public class PlayerScript : CharacterScript
         {
             canMove = true;
             canTurn = true;
+        }
+
+        if (stateScript.Hp <= 0 && !defeated)
+        {
+            Destroy(currentAttack);
+            currentAttack = InstantiateAttack(Attacks[3]);
+            defeated = true;
         }
     }
 
@@ -134,6 +146,8 @@ public class PlayerScript : CharacterScript
     {
         audioSource.PlayOneShot(DamagedSound);
         parry.ResetBufferAndCd();
+        float f = 8 * (1 + damage * 0.02f);
+        cameraScript.ScreenShakeRotSHM((Random.Range(0, 2) == 0 ? -1 : 1) * Mathf.Sqrt(damage) * 0.5f, f, 2f, f * Mathf.Lerp(0.05f, 0.12f, damage * 0.02f));
     }
 
     public bool SwordCanParry()

@@ -82,7 +82,7 @@ public class PlayerControlScript : MonoBehaviour
     {
         if (!playerScript.canTurn)
             return;
-            
+
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
         float mouseX = mouseDelta.x * mouseSensitivity;
         transform.Rotate(0, mouseX, 0);
@@ -137,7 +137,7 @@ public class PlayerControlScript : MonoBehaviour
 
             verticalRotation -= mouseY;
             verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
-            playerCamera.transform.rotation = Quaternion.Euler(verticalRotation, transform.rotation.eulerAngles.y, 0);
+            playerCamera.transform.rotation = Quaternion.Euler(verticalRotation, transform.rotation.eulerAngles.y, playerCamera.transform.rotation.eulerAngles.z);
             Vector3 deltaPos = cameraLatencyPlayerPosition - transform.position;
             float deltaDist = Vector3.Distance(deltaPos, Vector3.zero);
             deltaDist = Mathf.Clamp(0, deltaDist * Mathf.Pow(0.9f, Time.deltaTime * 60f) - Time.deltaTime * 0.001f, 3);

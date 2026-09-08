@@ -13,6 +13,7 @@ public class TutorialBossKnockedgenerator : TutorialBossAttackGenerator
         yield return new WaitForSeconds(2f);
         GameObject hinter = AttackHinterscript.NewPlayer(RecoverSound, 1f, 0f, 0f);
         hinter.transform.parent = spawner.transform;
+        hinter.transform.localPosition = Vector3.zero;
         yield return new WaitForSeconds(1f);
         yield return PlayAnimationAndLoop(RecoverAmimation);
         yield return new WaitForSeconds(0.5f);

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using Mono.Cecil;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
     protected bool isWindup = true;
     protected bool isSlashing = false;
     public float knockbackMag = 1f;
+    public HintSoundPath HintPath;
 
     protected virtual void Awake()
     {
@@ -60,15 +62,16 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
     protected virtual IEnumerator Windup()
     {
         GameObject hinter = AttackHinterscript.NewPlayer(ImplicitHintSound, soundHintTime, soundSpaceTime, 0f);
-        hinter.transform.parent = spawner.transform;
-        hinter.transform.localPosition = Vector3.zero;
+        LoadHintSoundPath(hinter, target, HintPath, soundHintTime);
+        // hinter.transform.parent = spawner.transform;
+        // hinter.transform.localPosition = Vector3.zero;
         yield return new WaitForSeconds(windupTime);
         animator.speed = 0f;
         animator.Play(WindupAnimation.name);
         animator.Update(0);
 
 
-        hinter.transform.parent = spawner.transform;
+        // hinter.transform.parent = spawner.transform;
         while (hinter != null)
         {
             WindupLoopAction();

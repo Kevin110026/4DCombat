@@ -3515,7 +3515,7 @@ PrefabInstance:
       objectReference: {fileID: 3648374908387308195, guid: bfb42b5e8d6955e4a982d3a518126e00, type: 3}
     - target: {fileID: -5890789235371720558, guid: e86d3c2a1df036147b94c5445c252f52, type: 3}
       propertyPath: testingAttackId
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -5890789235371720558, guid: e86d3c2a1df036147b94c5445c252f52, type: 3}
       propertyPath: attacksWeights.Array.size

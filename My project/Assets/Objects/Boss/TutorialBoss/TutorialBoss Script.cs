@@ -32,6 +32,7 @@ public class TutorialBossScript : CharacterScript
     [SerializeField] int[] stageAttackActive = { 18, 40, 60 };
     [SerializeField] int[] stageEnergyRecovery = { 6, 16, 28 };
     private bool knocked = false;
+    private bool fighting = true;
     [HideInInspector] public bool start = false;
 
     Animator animator;
@@ -61,6 +62,13 @@ public class TutorialBossScript : CharacterScript
         base.Update();
         if (!start)
             return;
+        fighting = target.GetComponent<CharacterStateScript>().Hp > 0;
+        if (!fighting)
+        {
+            Destroy(currentAttackGenerator);
+            FaceTarget();
+            return;
+        }
 
         if (!autoAttack && (transform.position - target.transform.position).magnitude <= 6)
             autoAttack = true;
