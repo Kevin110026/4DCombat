@@ -314,6 +314,15 @@ MonoBehaviour:
   - {fileID: 439245425424121932, guid: 022280cb303dbea4382a0948340ddd06, type: 3}
   - {fileID: 7878755565497482301, guid: bea2c2e0ce92b4c4f9cb1f30d2e624ff, type: 3}
   - {fileID: 1948082297965921134, guid: c1d7f0de0b5d4f748a3451981a6b3800, type: 3}
+  - {fileID: 3425308823871013390, guid: 83b9df5c76778b74c9eb2de17a6c744b, type: 3}
+  - {fileID: 6795176329321422325, guid: 05b319dadb3ffbf44ab97db545104f10, type: 3}
+  - {fileID: 8837820597012976540, guid: 6d0cd168055200949b228a07293a16ec, type: 3}
+  - {fileID: 3112183309236842735, guid: 5ac724f1b2283a64f969a1d0f2e5e089, type: 3}
+  - {fileID: 8837820597012976540, guid: 4f731a750be907e4cbabe10b3c9c02de, type: 3}
+  - {fileID: 3112183309236842735, guid: 5bd026eec00004247ba78252d28b43e1, type: 3}
+  - {fileID: 8012412728616009070, guid: 5937a02ba76792d44945532030954bfe, type: 3}
+  - {fileID: 3574858560898709968, guid: c4b7d52ff6edf8b49a0e1cf6f52c4e1c, type: 3}
+  attacksWeights: 
   movements:
   - {fileID: 3627387829584988482, guid: 895ac13e6aec5e346b9c9e7f0210a5bb, type: 3}
   - {fileID: 6489946983446793090, guid: 565241aec112e0242902da930b4cc742, type: 3}
@@ -328,6 +337,13 @@ MonoBehaviour:
   difficulty: 0.2
   DamagedSound: {fileID: 8300000, guid: 07a2ad751e58d9947a1d23e91e9f15cf, type: 3}
   RandomAttackCD: 0
+  autoAttack: 0
+  stage: 0
+  stageHp: c80000002c01000058020000
+  stageEnergyMax: 140000003200000046000000
+  stageAttackActive: 12000000280000003c000000
+  stageEnergyRecovery: 06000000100000001c000000
+  start: 0
 --- !u!143 &6907682364704632988
 CharacterController:
   m_ObjectHideFlags: 0

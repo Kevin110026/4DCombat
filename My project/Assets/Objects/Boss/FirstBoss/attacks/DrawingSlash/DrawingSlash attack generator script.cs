@@ -25,8 +25,9 @@ public class DrawingSlashattackgeneratorscript : AttackGenerator
     [HideInInspector] public bool lowcd = false;
     [HideInInspector] public AudioClip parriedSound;
 
-    void Awake()
+    override protected void Awake()
     {
+        base.Awake();
         parriedSound = Resources.Load<AudioClip>("parry-3-limbus");
     }
     protected override void Start()
@@ -183,9 +184,11 @@ public class DrawingSlashattackgeneratorscript : AttackGenerator
         // GameObject.Destroy(tro);
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
-        GameObject.Destroy(HintLight);
-        // GameObject.Destroy(tro);
+        base.OnDestroy();
+        Destroy(HintLight);
+        Destroy(tro);
     }
+
 }

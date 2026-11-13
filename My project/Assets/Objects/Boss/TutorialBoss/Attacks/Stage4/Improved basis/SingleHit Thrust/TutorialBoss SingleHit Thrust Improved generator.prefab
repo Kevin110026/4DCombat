@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8012412728616009070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5672013609031018168}
+  - component: {fileID: 458876870425025917}
+  m_Layer: 0
+  m_Name: TutorialBoss SingleHit Thrust Improved generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5672013609031018168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012412728616009070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.01655, y: 2.58988, z: 20.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &458876870425025917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012412728616009070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26850fd12d7bd134798fb2258b2d5107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialBossSingleHitThrustImprovedgenerator
+  spawner: {fileID: 0}
+  target: {fileID: 0}
+  parriedPitch: 1
+  difficulty: 0.2
+  maxEnergyCost: 0
+  WindupAnimation: {fileID: 7400000, guid: f930fab61902efe42829da5f0b8bf243, type: 2}
+  WindupAnimationPlaySpeed: -1
+  AttackAnimation: {fileID: 7400000, guid: dc22a202fa7eefe4fa289d954a177cff, type: 2}
+  AttackAnimationPlaySpeed: -1
+  WindupStallTime: 0
+  isWindup: 1
+  knockbackMag: 1
+  attPerfab: {fileID: 5755274136271376727, guid: 01276c2fdb841b0489291713cb0bfd14, type: 3}
+  maxFloatDistanceX: 8
+  maxFloatSpeedX: 16
+  maxFloatDistanceZ: 5
+  maxFloatSpeedZ: 100
+  maxThrustSpeed: 24

@@ -3,6 +3,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore;
 
 [RequireComponent(typeof(Animator))]
@@ -48,12 +49,7 @@ public class TutorialBossScript : CharacterScript
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        stateScript.HpMax = stageHp[stage];
-        stateScript.Hp = stateScript.HpMax;
-        stateScript.BurstEnergyMax = stageEnergyMax[stage];
-        stateScript.BurstEnergy = stateScript.BurstEnergyMax;
-
-        lastHp = stateScript.Hp;
+        ResetState();
     }
 
     // Update is called once per frame
@@ -87,6 +83,15 @@ public class TutorialBossScript : CharacterScript
             Destroy(currentAttackGenerator);
             currentAttackGenerator = InstantiateAttack(KnockedAnim);
             knocked = true;
+            if (stage < 2)
+            {
+                Camera.allCameras[0].GetComponentInParent<CameraScript>().ScreenShakeFov(-10f, 0.66f, 0.34f);
+            }
+            else
+            {
+                Camera.allCameras[0].GetComponentInParent<CameraScript>().ScreenShakeFov(-20f, 1.3f, 0.5f);
+                Camera.allCameras[0].GetComponentInParent<CameraScript>().ScreenShakeFovSHM(2, 12, 1, 4);
+            }
         }
         if (knocked && currentAttackGenerator == null)
         {
@@ -96,10 +101,7 @@ public class TutorialBossScript : CharacterScript
             }
             if (stage < 3)
             {
-                stateScript.HpMax = stageHp[stage];
-                stateScript.Hp = stateScript.HpMax;
-                stateScript.BurstEnergyMax = stageEnergyMax[stage];
-                stateScript.BurstEnergy = stateScript.BurstEnergyMax;
+                ResetState();
                 knocked = false;
                 attackActive = true;
             }
@@ -152,17 +154,18 @@ public class TutorialBossScript : CharacterScript
             {
                 int i = testingAttackId;
                 Object attack = attacks[i];
-                Object instant = Instantiate(attack, new Vector3(0, 0, 0), new Quaternion());
-                currentAttackGenerator = (GameObject)instant;
-                AttackGenerator attack_generator_script = instant.GetComponent<AttackGenerator>();
-                if (attack_generator_script == null)
-                {
-                    Debug.Log("error! generated none-attack-generator!");
-                    return;
-                }
-                attack_generator_script.spawner = gameObject;
-                attack_generator_script.target = target;
-                attack_generator_script.difficulty = testingAttackDifficulty;
+                currentAttackGenerator = InstantiateAttack(attack);
+                // Object instant = Instantiate(attack, new Vector3(0, 0, 0), new Quaternion());
+                // currentAttackGenerator = (GameObject)instant;
+                // AttackGenerator attack_generator_script = instant.GetComponent<AttackGenerator>();
+                // if (attack_generator_script == null)
+                // {
+                //     Debug.Log("error! generated none-attack-generator!");
+                //     return;
+                // }
+                // attack_generator_script.spawner = gameObject;
+                // attack_generator_script.target = target;
+                // attack_generator_script.difficulty = testingAttackDifficulty;
 
             }
             if (Keyboard.current.rKey.wasPressedThisFrame)
@@ -172,6 +175,7 @@ public class TutorialBossScript : CharacterScript
             if (Keyboard.current.qKey.wasPressedThisFrame)
             {
                 autoAttack = !autoAttack;
+                start = !start;
             }
         }
 
@@ -239,15 +243,18 @@ public class TutorialBossScript : CharacterScript
     GameObject InstantiateAttack(Object attack)
     {
         Object instant = Instantiate(attack, new Vector3(0, 0, 0), new Quaternion());
-        AttackGenerator attack_generator_script = instant.GetComponent<AttackGenerator>();
-        if (attack_generator_script == null)
+        AttackGenerator[] attack_generator_scripts = instant.GetComponents<AttackGenerator>();
+        // if (attack_generator_script == null)
+        // {
+        //     Debug.Log("error! generated none-attack-generator!");
+        //     return null;
+        // }
+        foreach (AttackGenerator attGenScr in attack_generator_scripts)
         {
-            Debug.Log("error! generated none-attack-generator!");
-            return null;
+            attGenScr.spawner = this.gameObject;
+            attGenScr.target = target;
+            attGenScr.difficulty = difficulty;
         }
-        attack_generator_script.spawner = this.gameObject;
-        attack_generator_script.target = target;
-        attack_generator_script.difficulty = difficulty;
         return (GameObject)instant;
     }
 
@@ -261,6 +268,10 @@ public class TutorialBossScript : CharacterScript
         // Debug.Log(lastHp - stateScript.Hp);
         if (currentAttackGenerator == null)
         {
+            if (stage == 3)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
             currentAttackGenerator = InstantiateAttack(movements[1]);
             if (lastHp - stateScript.Hp >= 30 && Time.time > bigBackOffCd)
             {
@@ -270,6 +281,15 @@ public class TutorialBossScript : CharacterScript
                 bigBackOffCd = Time.time + 5f;
             }
         }
+    }
+
+    public void ResetState()
+    {
+        stateScript.HpMax = stageHp[stage];
+        stateScript.Hp = stateScript.HpMax;
+        stateScript.BurstEnergyMax = stageEnergyMax[stage];
+        stateScript.BurstEnergy = stateScript.BurstEnergyMax;
+        lastHp = stateScript.Hp;
     }
     void OnDestroy()
     {

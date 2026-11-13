@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6795176329321422325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 614418329058754154}
+  - component: {fileID: -236298425559966563}
+  m_Layer: 0
+  m_Name: TutorialBoss Stage1 Chain xACA generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &614418329058754154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6795176329321422325}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.01655, y: 2.58988, z: 20.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-236298425559966563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6795176329321422325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ba96d25aa677041a2314bae040b73d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialBossStage1ChainxACAgenerator
+  spawner: {fileID: 0}
+  target: {fileID: 0}
+  parriedPitch: 1
+  difficulty: 0.2
+  maxEnergyCost: 0
+  Left: {fileID: 8837820597012976540, guid: 6d0cd168055200949b228a07293a16ec, type: 3}
+  LeftCharged: {fileID: 8837820597012976540, guid: 4f731a750be907e4cbabe10b3c9c02de, type: 3}
+  Right: {fileID: 3112183309236842735, guid: 5ac724f1b2283a64f969a1d0f2e5e089, type: 3}
+  RightCharged: {fileID: 3112183309236842735, guid: 5bd026eec00004247ba78252d28b43e1, type: 3}
+  Down: {fileID: 3574858560898709968, guid: c4b7d52ff6edf8b49a0e1cf6f52c4e1c, type: 3}
+  DownCharged: {fileID: 5260093410940918252, guid: 71e148fd4cac4cc46b1cd5c950ca2f29, type: 3}
+  Thrust: {fileID: 8012412728616009070, guid: 5937a02ba76792d44945532030954bfe, type: 3}
+  ThrustCharged: {fileID: 3112183309236842735, guid: 86105e8d8809fd649941c6d6f142d2e3, type: 3}
+  spaceTime: 0.3

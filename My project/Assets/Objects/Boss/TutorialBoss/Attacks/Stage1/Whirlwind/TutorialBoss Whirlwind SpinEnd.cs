@@ -9,8 +9,9 @@ public class TutorialBossWhirlwindSpinEnd : TutorialBossAnimatedAttack
         yield return StartCoroutine(PlayAnimationAndLoop(SpinEndAnimation));
         Destroy(gameObject);
     }
-    void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         TutorialBossWhirlwindattack attack = blade.GetComponent<TutorialBossWhirlwindattack>();
         if (attack != null)
             Destroy(attack);

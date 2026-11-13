@@ -7,9 +7,9 @@ public class TutorialBossStage1SequanceCommonAttackgenerator : TutorialBossAttac
     public Object RightHit;
     public Object DownHit;
     public Object ThrustHit;
+    GameObject currentAttackGenerator;
     protected override IEnumerator StartAttack()
     {
-        GameObject currentAttackGenerator;
 
         currentAttackGenerator = InstantiateGenerator(LeftHit);
         currentAttackGenerator.GetComponent<TutorialBossCommonSwordAttackgenerator>().WindupStallTime = 0;
@@ -41,4 +41,13 @@ public class TutorialBossStage1SequanceCommonAttackgenerator : TutorialBossAttac
 
         Destroy(gameObject);
     }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Destroy(currentAttackGenerator);
+    }
+    // protected virtual void OnDestroy()
+    // {
+    //     Destroy(currentAttackGenerator);
+    // }
 }

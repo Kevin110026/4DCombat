@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerControlScript : MonoBehaviour
 {
     public float mouseSensitivity = 0.1f;
-    public Camera playerCamera;
+    public GameObject playerCamera;
     [HideInInspector] public PlayerScript playerScript;
     [HideInInspector] public CharacterScript characterScript;
     [HideInInspector] public CharacterMovementScript characterMovementScript;
@@ -71,6 +71,11 @@ public class PlayerControlScript : MonoBehaviour
         {
             playerScript.Heal();
         }
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            Application.Quit();
+        }
+
     }
 
     void LateUpdate()
@@ -93,7 +98,10 @@ public class PlayerControlScript : MonoBehaviour
     void HandlePlayerMovement()
     {
         if (!playerScript.canMove)
+        {
+            characterMovementScript.MoveInVelocityXZ(Vector3.zero);
             return;
+        }
 
         float moveX = 0f;
         float moveZ = 0f;
@@ -137,13 +145,21 @@ public class PlayerControlScript : MonoBehaviour
 
             verticalRotation -= mouseY;
             verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+            Quaternion playerLookDir = Quaternion.Euler(verticalRotation, transform.rotation.eulerAngles.y, 0);
             playerCamera.transform.rotation = Quaternion.Euler(verticalRotation, transform.rotation.eulerAngles.y, playerCamera.transform.rotation.eulerAngles.z);
             Vector3 deltaPos = cameraLatencyPlayerPosition - transform.position;
             float deltaDist = Vector3.Distance(deltaPos, Vector3.zero);
-            deltaDist = Mathf.Clamp(0, deltaDist * Mathf.Pow(0.9f, Time.deltaTime * 60f) - Time.deltaTime * 0.001f, 3);
+            deltaDist = Mathf.Clamp(0, deltaDist * Mathf.Pow(0.8f, Time.deltaTime * 60f) - Time.deltaTime * 0.001f, 3);
             deltaPos = deltaPos.normalized * deltaDist;
             cameraLatencyPlayerPosition = transform.position + deltaPos;
-            playerCamera.transform.position = cameraLatencyPlayerPosition + Vector3.up * 1.5f - 3 * playerCamera.transform.forward;
+            // playerCamera.transform.position = cameraLatencyPlayerPosition + Vector3.up * 1.5f - 3 * playerCamera.transform.forward;
+            playerCamera.transform.position = cameraLatencyPlayerPosition + playerLookDir * Vector3.up * 1.5f - playerLookDir * Vector3.forward * 3;
+
+
+            Shader.SetGlobalVector("_CameraThroughWall_CutoutPlayerPosition", transform.position);
+            Shader.SetGlobalVector("_CameraThroughWall_CutoutCamPosition", playerCamera.transform.position);
+            Shader.SetGlobalFloat("_CameraThroughWall_CutoutRadius", (transform.position - playerCamera.transform.position).magnitude);
+            Shader.SetGlobalFloat("_CameraThroughWall_CutoutSmoothness", 0.5f);
         }
     }
     private RaycastHit[] HandleParryBoxPositionHits = new RaycastHit[10];

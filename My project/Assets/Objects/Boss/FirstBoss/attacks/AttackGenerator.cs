@@ -1,10 +1,6 @@
 
 using System;
 using System.Collections;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class AttackGenerator : MonoBehaviour
@@ -12,10 +8,16 @@ public class AttackGenerator : MonoBehaviour
     protected static readonly WaitForSeconds _waitForSeconds1 = new(1);
     [HideInInspector] public GameObject spawner;
     [HideInInspector] public GameObject target;
+    [HideInInspector] public float parriedPitch = 1.0f;
     public float difficulty = 0.2f;
     public float maxEnergyCost = 0;
     private Coroutine startAttack;
 
+    protected CameraScript cameraScript;
+    virtual protected void Awake()
+    {
+        cameraScript = Camera.allCameras[0].GetComponentInParent<CameraScript>();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
@@ -27,7 +29,7 @@ public class AttackGenerator : MonoBehaviour
 
     }
 
-    void OnDestroy()
+    virtual protected void OnDestroy()
     {
         StopCoroutine(startAttack);
     }
@@ -38,13 +40,21 @@ public class AttackGenerator : MonoBehaviour
         yield return _waitForSeconds1;
         Destroy(gameObject);
     }
+
+    public virtual void OnParried(GameObject parrier)
+    {
+        // Debug.Log("parent OnParried called");
+    }
     public GameObject InstantiateGenerator(UnityEngine.Object perfab)
     {
         GameObject gen = (GameObject)Instantiate(perfab);
-        AttackGenerator attGenScr = gen.GetComponent<AttackGenerator>();
-        attGenScr.spawner = spawner;
-        attGenScr.target = target;
-        attGenScr.difficulty = difficulty;
+        AttackGenerator[] attack_generator_scripts = gen.GetComponents<AttackGenerator>();
+        foreach (AttackGenerator attGenScr in attack_generator_scripts)
+        {
+            attGenScr.spawner = spawner;
+            attGenScr.target = target;
+            attGenScr.difficulty = difficulty;
+        }
         return gen;
     }
 
@@ -54,6 +64,7 @@ public class AttackGenerator : MonoBehaviour
         gen.spawner = spawner;
         gen.target = target;
         gen.difficulty = difficulty;
+        gen.parriedPitch = parriedPitch;
         return gen;
     }
     public T InstantiateAttack<T>(GameObject obj) where T : AttackScript
@@ -61,7 +72,8 @@ public class AttackGenerator : MonoBehaviour
         T att = obj.AddComponent<T>();
         att.spawner = spawner;
         att.target = target;
-        att.AttackGenerator = this;
+        att.parriedPitch = parriedPitch;
+        att.attackGenerator = this;
         return att;
     }
     public GameObject InstantiateAttack(UnityEngine.Object perfab)
@@ -71,7 +83,8 @@ public class AttackGenerator : MonoBehaviour
         {
             attScr.spawner = spawner;
             attScr.target = target;
-            attScr.AttackGenerator = this;
+            attScr.parriedPitch = parriedPitch;
+            attScr.attackGenerator = this;
         }
         else
         {

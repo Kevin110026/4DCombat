@@ -8,8 +8,8 @@ public class PlayerDashSlashattack : PlayerAttackAttack
     {
         base.Start();
 
-        speed = AttackGenerator.GetComponent<PlayerDashSlashgenerator>().speed;
-        dir = AttackGenerator.GetComponent<PlayerDashSlashgenerator>().dir;
+        speed = attackGenerator.GetComponent<PlayerDashSlashgenerator>().speed;
+        dir = attackGenerator.GetComponent<PlayerDashSlashgenerator>().dir;
 
     }
 
@@ -29,7 +29,7 @@ public class PlayerDashSlashattack : PlayerAttackAttack
                 if (spawner != hitObj && canDamage)
                 {
                     DamageCharacter(hitObj);
-                    AttackGenerator.GetComponent<PlayerDashSlashgenerator>().stopPoint =
+                    attackGenerator.GetComponent<PlayerDashSlashgenerator>().stopPoint =
                         ori + dir * hit.distance;
                     Destroy(gameObject);
                     break;

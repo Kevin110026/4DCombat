@@ -1,12 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class TutorialBossStage1ChainLRCTgenerator : TutorialBossAttackGenerator
 {
-    public Object LeftHit;
-    public Object RightHit;
-    public Object ThrustHitCharged;
+    public GameObject LeftHit;
+    public GameObject RightHit;
+    public GameObject ThrustHitCharged;
 
     private static readonly float[][] hitTimes = new float[][] {
         new float[] { 0.5f, 1.0f },
@@ -24,53 +25,5 @@ public class TutorialBossStage1ChainLRCTgenerator : TutorialBossAttackGenerator
         yield return StartCoroutine(HitAfterSecond(hitTime, ThrustHitCharged, 5f, 10f, 0.3f, 0.3f, 0.27f));
 
         Destroy(gameObject);
-    }
-
-    IEnumerator HitAfterSecond(float seconds, Object attackGenObj, float WindupSpeed, float AttackSpeed)
-    {
-        float offset = seconds;
-        TutorialBossAnimatedAttack attack = attackGenObj.GetComponent<TutorialBossAnimatedAttack>();
-        offset -= attack.WindupAnimation.length / WindupSpeed;
-        offset -= attack.AttackAnimation.length / AttackSpeed / 2;
-        float spawnTime = Time.time + offset;
-
-        while (Time.time < spawnTime)
-            yield return null;
-
-        GameObject curGenObj;
-        TutorialBossAnimatedAttack curGen;
-        curGenObj = InstantiateGenerator(attackGenObj);
-        curGen = curGenObj.GetComponent<TutorialBossAnimatedAttack>();
-        curGen.WindupAnimationPlaySpeed = WindupSpeed;
-        curGen.AttackAnimationPlaySpeed = AttackSpeed;
-        while (curGenObj != null)
-            yield return null;
-
-    }
-    IEnumerator HitAfterSecond(float seconds, Object attackGenObj, float WindupSpeed, float AttackSpeed, float HintTime, float SpaceTime, float windupTime)
-    {
-        float offset = seconds;
-        TutorialBossAnimatedAttack attack = attackGenObj.GetComponent<TutorialBossAnimatedAttack>();
-        offset -= HintTime;
-        offset -= SpaceTime;
-        offset -= attack.WindupAnimation.length / WindupSpeed;
-        offset -= attack.AttackAnimation.length / AttackSpeed / 2;
-        float spawnTime = Time.time + offset;
-
-        while (Time.time < spawnTime)
-            yield return null;
-            
-        GameObject curGenObj;
-        TutorialBossCommonSwordAttackChargedgenerator curGen;
-        curGenObj = InstantiateGenerator(attackGenObj);
-        curGen = curGenObj.GetComponent<TutorialBossCommonSwordAttackChargedgenerator>();
-        curGen.WindupAnimationPlaySpeed = WindupSpeed;
-        curGen.AttackAnimationPlaySpeed = AttackSpeed;
-        curGen.soundHintTime = HintTime;
-        curGen.soundSpaceTime = SpaceTime;
-        curGen.windupTime = windupTime;
-        while (curGenObj != null)
-            yield return null;
-
     }
 }

@@ -32,7 +32,7 @@ public class FloatingCombatText : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.LookAt(Camera.allCameras[0].transform.position);
+        transform.LookAt(Camera.allCameras[0].transform.parent.position);
     }
 
     static public GameObject NewFCT(string text)

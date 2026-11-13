@@ -25,6 +25,10 @@ public class TutorialBossWhirlwindgenerator : TutorialBossAnimatedAttack
             spawner.GetComponent<CharacterController>().Move(rot * Vector3.forward * MoveSpeed * Time.deltaTime);
         }
     }
+    GameObject windup;
+    GameObject spinBegin;
+    GameObject spinning;
+    GameObject spinEnd;
     protected override IEnumerator StartAttack()
     {
         GameObject windup = InstantiateGenerator(Windup);
@@ -52,4 +56,26 @@ public class TutorialBossWhirlwindgenerator : TutorialBossAnimatedAttack
             yield return null;
         Destroy(gameObject);
     }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Destroy(windup);
+        Destroy(spinBegin);
+        Destroy(spinning);
+        Destroy(spinEnd);
+        TutorialBossWhirlwindattack attack = blade.GetComponent<TutorialBossWhirlwindattack>();
+        if (attack != null)
+            Destroy(attack);
+    }
+    // protected virtual void OnDestroy()
+    // {
+    //     Destroy(windup);
+    //     Destroy(spinBegin);
+    //     Destroy(spinning);
+    //     Destroy(spinEnd);
+    //     TutorialBossWhirlwindattack attack = blade.GetComponent<TutorialBossWhirlwindattack>();
+    //     if (attack != null)
+    //         Destroy(attack);
+    // }
 }

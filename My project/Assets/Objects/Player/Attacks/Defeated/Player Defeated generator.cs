@@ -9,9 +9,9 @@ public class PlayerDefeatedgenerator : PlayerAttackGenerator
         playerScript.canAct = false;
         playerScript.canMove = false;
         playerScript.canTurn = false;
-        Camera cam = spawner.GetComponent<PlayerControlScript>().playerCamera;
+        GameObject cam = spawner.GetComponent<PlayerControlScript>().playerCamera;
         CameraScript cameraScript = cam.GetComponent<CameraScript>();
-        cam.fieldOfView = 100;
+        cameraScript.fieldOfView = 100;
         cameraScript.FovChangeLinear(-10, 3);
         cameraScript.ScreenShakeFovSHM(20, 10, 3, 10 * 2);
         cameraScript.ScreenShakeRotSHM(20, 10, 3, 10 * 2);

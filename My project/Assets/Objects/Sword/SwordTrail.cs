@@ -1,6 +1,4 @@
 using System;
-using System.Data;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 

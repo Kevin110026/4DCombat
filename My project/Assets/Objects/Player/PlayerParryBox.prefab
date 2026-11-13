@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.252, y: 1.4259, z: -8.641}
-  m_LocalScale: {x: 0.11472073, y: 2.0637197, z: 1}
+  m_LocalScale: {x: 0.11472073, y: 1.29, z: 0.85}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5687345322471478505}
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerParryBoxscript
   parryCD: 0.25
   parryWindow: 0.3
+  blockEnergyConsumeMultiplier: 2
   parryLightObject: {fileID: 8923741070187111660}
   parrySounds: []
   playerScript: {fileID: 0}

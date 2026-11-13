@@ -26,7 +26,7 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
     {
         playerScript.canMove = false;
         playerScript.canTurn = false;
-        CameraScript cameraScript = Camera.allCameras[0].GetComponent<CameraScript>();
+        CameraScript cameraScript = Camera.allCameras[0].GetComponentInParent<CameraScript>();
 
         {// calculate attack direction
             Vector3 rot = spawner.transform.rotation.eulerAngles;
@@ -39,7 +39,6 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
         animator.speed = 10f;
 
         AttackHinterscript.NewPlayer(ImplicitHintSound, 0.5f, 0.2f, 0f);
-        Camera cam = spawner.GetComponent<PlayerControlScript>().playerCamera;
         cameraScript.FovChangeLinear(-30, 0.5f);
         yield return new WaitForSeconds(0.7f);
 
@@ -71,9 +70,9 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
 
         // playerScript.
     }
-
-    protected virtual void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         swordTrail.DeactivateAll();
     }
 }

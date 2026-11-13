@@ -22,8 +22,8 @@ public class PlayerHealgenerator : PlayerAttackGenerator
         hintPlayer.transform.parent = spawner.transform;
         hintPlayer.transform.localPosition = Vector3.zero;
 
-        Camera cam = spawner.GetComponent<PlayerControlScript>().playerCamera;
-        CameraScript cameraScript = Camera.allCameras[0].GetComponent<CameraScript>();
+        // Camera cam = spawner.GetComponent<PlayerControlScript>().playerCamera;
+        CameraScript cameraScript = Camera.allCameras[0].GetComponentInParent<CameraScript>();
         float endTime = Time.time + healTimeFront;
         cameraScript.FovChangeLinear(-12, healTimeFront - 0.1f);
         while (Time.time < endTime)

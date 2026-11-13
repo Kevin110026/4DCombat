@@ -168,8 +168,9 @@ public class TripleSlashattackgeneratorscript : AttackGenerator
         slash1.GetComponent<AttackScript>().parriedSound = Resources.Load<AudioClip>("parry-3-limbus");
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
-        GameObject.Destroy(HintLight);
+        base.OnDestroy();
+        Destroy(HintLight);
     }
 }

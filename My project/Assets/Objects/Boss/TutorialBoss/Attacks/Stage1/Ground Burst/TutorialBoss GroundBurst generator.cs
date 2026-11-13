@@ -11,6 +11,7 @@ public class TutorialBossGroundBurstgenerator : TutorialBossAttackGenerator
     public float waveNormalizedSpeed = 20f;
     public int waveNormalizedLength = 20;
     [SerializeField] Object attackPerfab;
+    [SerializeField] HintSoundPath hintPath;
     [HideInInspector] public bool attackedPlayerThisTick = false;
 
     [SerializeField] AnimationClip WindupAnim;
@@ -28,8 +29,9 @@ public class TutorialBossGroundBurstgenerator : TutorialBossAttackGenerator
         tutorialBossScript.ConsumeBurstEnergy(30f);
         yield return PlayAnimationAndLoop(WindupAnim);
         GameObject hinter = AttackHinterscript.NewPlayer(ImplicitHintSound, windupTime, slashWindow, 0f);
-        hinter.transform.parent = spawner.transform;
-        hinter.transform.localPosition = Vector3.zero;
+        LoadHintSoundPath(hinter, HinterLocateTool.AFaceB(target, spawner), hintPath, windupTime);
+        // hinter.transform.parent = spawner.transform;
+        // hinter.transform.localPosition = Vector3.zero;
         hinter.GetComponent<AudioSource>().pitch = 0.3f;
         yield return new WaitForSeconds(windupTime);
     }

@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
-using Mono.Cecil;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimatedAttack
 {
@@ -12,12 +8,12 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
     public float windupTime = 0.27f;
     public AudioClip ImplicitHintSound;
 
-    protected bool isWindup = true;
-    protected bool isSlashing = false;
+    [HideInInspector] public bool isWindup = true;
+    [HideInInspector] public bool isSlashing = false;
     public float knockbackMag = 1f;
     public HintSoundPath HintPath;
 
-    protected virtual void Awake()
+    override protected void Awake()
     {
         if (WindupAnimationPlaySpeed == -1)
         {
@@ -62,7 +58,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
     protected virtual IEnumerator Windup()
     {
         GameObject hinter = AttackHinterscript.NewPlayer(ImplicitHintSound, soundHintTime, soundSpaceTime, 0f);
-        LoadHintSoundPath(hinter, target, HintPath, soundHintTime);
+        LoadHintSoundPath(hinter, HinterLocateTool.AFaceB(target, spawner, soundHintTime), HintPath, soundHintTime);
         // hinter.transform.parent = spawner.transform;
         // hinter.transform.localPosition = Vector3.zero;
         yield return new WaitForSeconds(windupTime);
@@ -85,7 +81,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
         float k = Mathf.Clamp(dist, -1 * Time.deltaTime, 400 * Time.deltaTime);
         cc.Move(k * spawner.transform.forward);
     }
-
+    TutorialBossCommonSwordAttackChargedattack attack;
     protected virtual IEnumerator Attack()
     {
         animator.speed = WindupAnimationPlaySpeed;
@@ -93,7 +89,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
 
         isSlashing = true;
 
-        TutorialBossCommonSwordAttackChargedattack attack = InstantiateAttack<TutorialBossCommonSwordAttackChargedattack>(blade);
+        attack = InstantiateAttack<TutorialBossCommonSwordAttackChargedattack>(blade);
         attack.energy = 4.5f;
         attack.knockbackMag = knockbackMag;
         tutorialBossScript.ConsumeBurstEnergy(10f);
@@ -117,5 +113,11 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
         Destroy(attack);
 
         animator.speed = 1;
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Destroy(attack);
     }
 }

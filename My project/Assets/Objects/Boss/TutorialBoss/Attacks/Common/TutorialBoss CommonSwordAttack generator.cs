@@ -1,17 +1,17 @@
 using System.Collections;
-using Mono.Cecil;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
 {
     public float WindupStallTime = 0;
-    protected bool isWindup = true;
+    public bool isWindup = true;
     public float knockbackMag = 1f;
 
-    protected virtual void Awake()
+    CameraScript.WaveAlongObject_Obj camWave;
+
+    override protected void Awake()
     {
+        base.Awake();
         if (WindupAnimationPlaySpeed == -1)
         {
             WindupAnimationPlaySpeed = 1;
@@ -66,12 +66,17 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
         float dist = (spawner.transform.position - target.transform.position).magnitude - 3f;
         float k = Mathf.Clamp(dist, -1 * Time.deltaTime, 4 * Time.deltaTime);
         cc.Move(k * spawner.transform.forward);
-    }
 
+        if (camWave == null)
+        {
+            // camWave = cameraScript.WaveAlongObject(blade, 0.25f, 2f, 0.3f);
+        }
+    }
+    TutorialBossCommonSwordAttackattack attack;
     protected virtual IEnumerator Attack()
     {
 
-        TutorialBossCommonSwordAttackattack attack = InstantiateAttack<TutorialBossCommonSwordAttackattack>(blade);
+        attack = InstantiateAttack<TutorialBossCommonSwordAttackattack>(blade);
         attack.energy = 4.5f;
         attack.knockbackMag = knockbackMag;
         tutorialBossScript.ConsumeBurstEnergy(4.5f);
@@ -90,4 +95,23 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
 
         Destroy(attack);
     }
+
+    public override void OnParried(GameObject parrier)
+    {
+        base.OnParried(parrier);
+        // Debug.Log("parry cam wave");
+        camWave.Parried();
+        // Destroy(camWave);
+    }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Destroy(attack);
+        // Destroy(camWave);
+        camWave.setTargetObj(null);
+    }
+    // protected virtual void OnDestroy()
+    // {
+    //     Destroy(attack);
+    // }
 }

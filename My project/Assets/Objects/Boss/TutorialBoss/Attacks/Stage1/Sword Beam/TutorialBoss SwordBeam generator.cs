@@ -44,13 +44,13 @@ public class TutorialBossSwordBeamgenerator : TutorialBossAttackGenerator
 
         Destroy(gameObject);
     }
-    GameObject hinterCarrier;
+    // GameObject hinterCarrier;
     protected virtual IEnumerator OneBeam(AnimationClip WindupAnim, AnimationClip SlashAnim, float deltaDeg, HintSoundPath hintPath)
     {
         GameObject hinter = AttackHinterscript.NewPlayer(ImplicitHintSound, hintTime, windowTime);
         hinter.GetComponent<AudioSource>().pitch = 0.8f;
-        hinterCarrier = new GameObject("HinterCarrier");
-        LoadHintSoundPath(hinter, hinterCarrier, hintPath, hintTime);
+        // hinterCarrier = new GameObject("HinterCarrier");
+        LoadHintSoundPath(hinter, HinterLocateTool.AFaceB(target, spawner, hintTime + windowTime), hintPath, hintTime);
         Vector3 rot = Quaternion.LookRotation(spawner.transform.position - target.transform.position).eulerAngles;
         rot.x = 0; rot.z = 0;
         hinter.transform.rotation = Quaternion.Euler(rot);
@@ -58,8 +58,8 @@ public class TutorialBossSwordBeamgenerator : TutorialBossAttackGenerator
         // hinter.transform.parent = spawner.transform;
         animator.speed = WindupAnim.length / (hintTime + windowTime);
         StartCoroutine(PlayAnimationAndLoop(WindupAnim));
-        yield return LoopForSeconds(hintTime + windowTime, LocateHinter);
-        // yield return new WaitForSeconds(hintTime + windowTime);
+        // yield return LoopForSeconds(hintTime + windowTime, LocateHinter);
+        yield return new WaitForSeconds(hintTime + windowTime);
 
         GameObject attObj = InstantiateAttack(BeamPrefab);
         attObj.GetComponent<TutorialBossSwordBeamattack>().deltaDeg = deltaDeg;
@@ -69,21 +69,20 @@ public class TutorialBossSwordBeamgenerator : TutorialBossAttackGenerator
         animator.speed = SlashAnim.length / slashTime;
         StartCoroutine(PlayAnimationAndLoop(SlashAnim, tutorialBossScript.FaceTarget));
         yield return new WaitForSeconds(slashTime);
-        Destroy(hinterCarrier);
+        // Destroy(hinterCarrier);
     }
-    void LocateHinter()
-    {
-        GameObject carrier = hinterCarrier;
-        carrier.transform.position = target.transform.position;
-        Vector3 rot = Quaternion.LookRotation(carrier.transform.position - spawner.transform.position).eulerAngles;
-        rot.x = 0; rot.z = 0;
-        carrier.transform.rotation = Quaternion.Euler(rot);
-    }
+    // void LocateHinter()
+    // {
+    //     GameObject carrier = hinterCarrier;
+    //     carrier.transform.position = target.transform.position;
+    //     Vector3 rot = Quaternion.LookRotation(carrier.transform.position - spawner.transform.position).eulerAngles;
+    //     rot.x = 0; rot.z = 0;
+    //     carrier.transform.rotation = Quaternion.Euler(rot);
+    // }
 
-    protected virtual void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         animator.speed = 1;
-        if (hinterCarrier != null)
-            Destroy(hinterCarrier);
     }
 }

@@ -8,7 +8,8 @@ public class PlayerNormalSlashgenerator : PlayerAttackGenerator
     public AnimationClip Slash1;
     public AnimationClip Windup2;
     public AnimationClip Slash2;
-
+    PlayerNormalSlashattack attack;
+    CameraScript.WaveAlongObject_Obj camWave;
     protected override IEnumerator StartAttack()
     {
         AnimationClip windup;
@@ -24,13 +25,20 @@ public class PlayerNormalSlashgenerator : PlayerAttackGenerator
             windup = Windup2;
             slash = Slash2;
         }
+        // camWave = playerScript.cameraScript.WaveAlongObject(blade);
         yield return PlayAnimationAndLoop(windup);
         blade.GetComponent<AudioSource>().PlayOneShot(slashSound);
-        PlayerNormalSlashattack attack = InstantiateAttack<PlayerNormalSlashattack>(attackBox);
+        attack = InstantiateAttack<PlayerNormalSlashattack>(attackBox);
         attack.energy = 2f;
         yield return PlayAnimationAndLoop(slash);
         yield return new WaitForSeconds(0.16f);
-        Destroy(attack);
         Destroy(gameObject);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Destroy(attack);
+        Destroy(camWave);
     }
 }

@@ -12,7 +12,7 @@ public class AttackScript : MonoBehaviour
     public AudioClip parriedSound;
     [HideInInspector] public GameObject spawner;
     [HideInInspector] public GameObject target;
-    [HideInInspector] public AttackGenerator AttackGenerator;
+    [HideInInspector] public AttackGenerator attackGenerator;
 
     [HideInInspector] public Vector3 knockbackDir = Vector3.zero;
     public float knockbackMag = 0;
@@ -48,5 +48,6 @@ public class AttackScript : MonoBehaviour
 
         CharacterController characterController = parrier.GetComponent<CharacterController>();
         characterController.Move(0.3f * knockbackMag * knockbackDir.normalized);
+        attackGenerator.OnParried(parrier);
     }
 }

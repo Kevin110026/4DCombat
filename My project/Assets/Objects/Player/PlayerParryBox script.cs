@@ -147,6 +147,8 @@ public class PlayerParryBoxscript : MonoBehaviour
         float parryEnergy = parryEnergyConsume * Mathf.Lerp(7f, 2.5f, (Time.time - parryStart) / parryWindow);
         float parriedEnergy = Mathf.Min(attack.energy, parryEnergy);
         attack.energy -= parriedEnergy;
+        characterScript.stateScript.BurstEnergy = Mathf.Min(characterScript.stateScript.BurstEnergy + parryEnergyConsume * 0.5f, characterScript.stateScript.BurstEnergyMax);
+        // characterScript.ConsumeBurstEnergy(-parryEnergyConsume * 0.5f);
         if (attack.energy == 0)
         {
             attack.OnParried(transform.parent.gameObject);
@@ -166,8 +168,8 @@ public class PlayerParryBoxscript : MonoBehaviour
         parryCDend = Time.time - 100 * parryWindow;
         parryStart = Time.time - 100 * parryWindow;
         parryLight.intensity = parriedEnergy * 40;
-        Debug.Log(parryLight.intensity);
-        playerScript.GetComponent<PlayerControlScript>().cameraScript.ScreenShakeFov();
+        // Debug.Log(parryLight.intensity);
+        // playerScript.GetComponent<PlayerControlScript>().cameraScript.ScreenShakeFov();
         TryToParryFromBuffer();
     }
 

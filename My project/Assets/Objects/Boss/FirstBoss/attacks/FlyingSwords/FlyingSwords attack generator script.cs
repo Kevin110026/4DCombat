@@ -37,7 +37,7 @@ public class FlyingSwordsattackgeneratorscript : AttackGenerator
             FlyingSwordsattackswordscript fsss = swords[i].GetComponent<FlyingSwordsattackswordscript>();
             fsss.spawner = spawner;
             fsss.target = target;
-            fsss.AttackGenerator = this;
+            fsss.attackGenerator = this;
             fsss.speed = fsss.GetMaxSpeed(difficulty);
             fsss.speedUp = true;
             fsss.parriedSound = Resources.Load<AudioClip>("parry-1-limbus");

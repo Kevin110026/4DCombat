@@ -80,7 +80,7 @@ public class CharacterMovementScript : MonoBehaviour
         velocity += acceleration;
 
         characterController.Move(velocity / 2 * Time.deltaTime);
-        
+
         if (characterController.isGrounded)
         {
             velocity.y = 0;
@@ -111,8 +111,15 @@ public class CharacterMovementScript : MonoBehaviour
     {
         if (height == -1)
             height = maxJumpHeight;
+        // Debug.Log("isGrounded: " + characterController.isGrounded);
         if (characterController.isGrounded)
             velocity.y = (float)Math.Sqrt(2 * -gravity * height);
+    }
+    public void ForceJump(float height = -1)
+    {
+        if (height == -1)
+            height = maxJumpHeight;
+        velocity.y = (float)Math.Sqrt(2 * -gravity * height);
     }
 
     public void MoveToXZ(Vector3 destination, float speed, Vector3 finalVelocity)

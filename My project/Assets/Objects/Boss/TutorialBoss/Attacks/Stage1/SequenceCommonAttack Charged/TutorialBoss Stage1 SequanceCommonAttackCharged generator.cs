@@ -7,9 +7,9 @@ public class TutorialBossStage1SequanceCommonAttackChargedgenerator : TutorialBo
     public Object RightHit;
     public Object DownHit;
     public Object ThrustHit;
+    GameObject currentAttackGenerator;
     protected override IEnumerator StartAttack()
     {
-        GameObject currentAttackGenerator;
 
         currentAttackGenerator = InstantiateGenerator(LeftHit);
         // while (currentAttackGenerator != null)
@@ -43,6 +43,18 @@ public class TutorialBossStage1SequanceCommonAttackChargedgenerator : TutorialBo
         // yield return new WaitForSeconds(0.2f);
         yield return new WaitForSeconds(0.2f * Random.Range(0, 2));
 
+        while (currentAttackGenerator != null)
+            yield return null;
+            
         Destroy(gameObject);
     }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Destroy(currentAttackGenerator);
+    }
+    // protected virtual void OnDestroy()
+    // {
+        
+    // }
 }

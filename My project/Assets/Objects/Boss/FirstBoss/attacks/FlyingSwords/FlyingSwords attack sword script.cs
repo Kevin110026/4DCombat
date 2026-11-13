@@ -1,4 +1,3 @@
-using UnityEditor.Rendering.Canvas.ShaderGraph;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
@@ -37,7 +36,7 @@ public class FlyingSwordsattackswordscript : AttackScript
         float derDot = Vector3.Dot(posDiff.normalized, transform.forward);
 
 
-        if (posDiff.magnitude >= 0.75f * GetMaxSpeed(AttackGenerator.difficulty))
+        if (posDiff.magnitude >= 0.75f * GetMaxSpeed(attackGenerator.difficulty))
         {
             if (derDot >= Mathf.Sqrt(3) / 2)
             {
@@ -64,14 +63,14 @@ public class FlyingSwordsattackswordscript : AttackScript
 
         if (speedUp)
         {
-            speed += Time.deltaTime * GetMaxAcceleration(AttackGenerator.difficulty);
+            speed += Time.deltaTime * GetMaxAcceleration(attackGenerator.difficulty);
         }
         else
         {
-            speed -= Time.deltaTime * GetMaxAcceleration(AttackGenerator.difficulty);
+            speed -= Time.deltaTime * GetMaxAcceleration(attackGenerator.difficulty);
         }
 
-        speed = Mathf.Clamp(speed, 3, GetMaxSpeed(AttackGenerator.difficulty));
+        speed = Mathf.Clamp(speed, 3, GetMaxSpeed(attackGenerator.difficulty));
 
         if (!attacking && rngRotateDiff == 1)
         {
@@ -83,7 +82,7 @@ public class FlyingSwordsattackswordscript : AttackScript
         }
 
         Vector3 targetDir = target.transform.position - transform.position;
-        float maxRadiansDelta = 4 * GetMaxAcceleration(AttackGenerator.difficulty) * rngRotateDiff / (speedUp ? 2 : 1) / speed * Time.deltaTime;
+        float maxRadiansDelta = 4 * GetMaxAcceleration(attackGenerator.difficulty) * rngRotateDiff / (speedUp ? 2 : 1) / speed * Time.deltaTime;
         Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, maxRadiansDelta, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDir);
         transform.position += transform.forward * speed * Time.deltaTime;
@@ -125,7 +124,7 @@ public class FlyingSwordsattackswordscript : AttackScript
             {
                 audioSource.time = 0.1f;
             }
-            if (posDiff.magnitude / GetMaxSpeed(AttackGenerator.difficulty) <= 0.5f && canDamage)
+            if (posDiff.magnitude / GetMaxSpeed(attackGenerator.difficulty) <= 0.5f && canDamage)
             {
                 audioSource.volume = 0;
             }
@@ -200,7 +199,7 @@ public class FlyingSwordsattackswordscript : AttackScript
 
     void OnDestroy()
     {
-        if (AttackGenerator != null && AttackGenerator.TryGetComponent(out FlyingSwordsattackgeneratorscript c))
+        if (attackGenerator != null && attackGenerator.TryGetComponent(out FlyingSwordsattackgeneratorscript c))
         {
             if (c != null)
                 c.remainingSwords--;

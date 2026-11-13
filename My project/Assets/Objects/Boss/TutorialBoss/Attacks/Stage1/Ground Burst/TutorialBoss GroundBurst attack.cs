@@ -10,7 +10,7 @@ public class TutorialBossGroundBurstattack : TutorialBossAttackAttack
     {
         base.Start();
         endTime = Time.time + duration;
-        generator = AttackGenerator.GetComponent<TutorialBossGroundBurstgenerator>();
+        generator = attackGenerator.GetComponent<TutorialBossGroundBurstgenerator>();
         knockbackDir = Vector3.up;
     }
 
@@ -63,7 +63,7 @@ public class TutorialBossGroundBurstattack : TutorialBossAttackAttack
     }
     protected override void DamageCharacter(GameObject character)
     {
-        damage = energy * 2;
+        damage = energy * 7f;
         base.DamageCharacter(character);
     }
 }

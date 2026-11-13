@@ -135,8 +135,9 @@ public class ViperStrikeattackgeneratorscript : AttackGenerator
         audioSource.Play();
     }
 
-    protected void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         movement.ResetMaxSpeedAndAcceletarion();
 
     }

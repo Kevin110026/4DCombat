@@ -17,4 +17,8 @@ public class PlayerAttackGenerator : AttackGenerator
         attackBox = playerScript.attackBox;
         base.Start();
     }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+    }
 }
