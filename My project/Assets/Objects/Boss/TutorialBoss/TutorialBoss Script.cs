@@ -136,6 +136,7 @@ public class TutorialBossScript : CharacterScript
 
     void EnergyRecovery()
     {
+        // stateScript.burs
         float recoveryRate = stage < 3 ? stageEnergyRecovery[stage] : 0;
         float recovery = attackActive == true ? 0 * Time.deltaTime : recoveryRate * Time.deltaTime;
         stateScript.BurstEnergy = Mathf.Min(stateScript.BurstEnergy + recovery, stateScript.BurstEnergyMax);
@@ -281,6 +282,7 @@ public class TutorialBossScript : CharacterScript
                 bigBackOffCd = Time.time + 5f;
             }
         }
+        Debug.Log(currentAttackGenerator);
     }
 
     public void ResetState()

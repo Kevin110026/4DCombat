@@ -69,11 +69,16 @@ public class AttackGenerator : MonoBehaviour
     }
     public T InstantiateAttack<T>(GameObject obj) where T : AttackScript
     {
+        // GameObject attObj = new GameObject();
+        // T att = attObj.AddComponent<T>();
+        // attObj.transform.SetParent(obj.transform);
+
         T att = obj.AddComponent<T>();
         att.spawner = spawner;
         att.target = target;
         att.parriedPitch = parriedPitch;
         att.attackGenerator = this;
+        att.dontDestroyGameobject = true;
         return att;
     }
     public GameObject InstantiateAttack(UnityEngine.Object perfab)
@@ -139,5 +144,33 @@ public class AttackGenerator : MonoBehaviour
                 loopFunction?.Invoke();
             yield return null;
         }
+    }
+
+
+    //  for parry's delayed hit
+    //  dont put multiple attack script that will destroy its gameobject in one gameobject
+    protected virtual void ScheduleDestroy(GameObject obj)
+    {
+        if (obj == null)
+            return;
+        MonoBehaviour[] components = obj.GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour component in components)
+        {
+            if (component is AttackScript attscr)
+            {
+                attscr.ScheduleDestroy();
+            }
+            else
+            {
+                component.enabled = false;
+            }
+        }
+        // Destroy(obj);
+    }
+    protected virtual void ScheduleDestroy(AttackScript attscr)
+    {
+        if (attscr == null)
+            return;
+        attscr.ScheduleDestroy();
     }
 }

@@ -26,15 +26,24 @@ public class TutorialBossWhirlwindattack : TutorialBossCommonSwordAttackattack
         haveDamaged = false;
         canDamage = true;
         canBeParried = true;
+        hittedByParryBox = false;
+        TheHitted = null;
+    }
+
+    public override void OnHitParryBox(PlayerParryBoxscript parryBox)
+    {
+        base.OnHitParryBox(parryBox);
+        CDEndTime = Time.time + AttackCD;
     }
     public override void OnParried(GameObject parrier)
     {
         base.OnParried(parrier);
-        CDEndTime = Time.time + AttackCD;
+        // CDEndTime = Time.time + AttackCD;
     }
     protected override void DamageCharacter(GameObject player)
     {
         base.DamageCharacter(player);
-        CDEndTime = Time.time + AttackCD;
+        if (!hittedByParryBox)
+            CDEndTime = Time.time + AttackCD;
     }
 }

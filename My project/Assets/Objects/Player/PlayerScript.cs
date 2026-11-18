@@ -21,7 +21,7 @@ public class PlayerScript : CharacterScript
 
     GameObject currentAttack;
 
-    Animator animator;
+    [HideInInspector] public Animator animator;
     [HideInInspector] public CameraScript cameraScript;
 
 
@@ -55,14 +55,16 @@ public class PlayerScript : CharacterScript
     override protected void Update()
     {
         base.Update();
-        stateScript.BurstEnergy = Mathf.Min(stateScript.BurstEnergy + 1.5f * Time.deltaTime, stateScript.BurstEnergyMax);
+        // ConsumeBurstEnergy(1.5f * Time.deltaTime);
+        // stateScript.BurstEnergy = Mathf.Min(stateScript.BurstEnergy + 10f * Time.deltaTime, stateScript.BurstEnergyMax);
+        // stateScript.BurstEnergy = Mathf.Min(stateScript.BurstEnergy + 1.5f * Time.deltaTime, stateScript.BurstEnergyMax);
         animator.Update(0);
         AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (animatorStateInfo.normalizedTime >= 1)
         {
             if (animatorStateInfo.normalizedTime >= 1 && parry.isBlocking && !parry.IsParrying())
             {
-                animator.Play("Player Block");
+                // animator.Play("Player Defence");
             }
             if (animatorStateInfo.normalizedTime >= 1 && SwordCanParry() && !parry.isBlocking && SwordCanAttack())
             {
@@ -93,8 +95,9 @@ public class PlayerScript : CharacterScript
 
     public void NormalSlash()
     {
-        if (SwordCanAttack())
+        if (SwordCanAttack() && stateScript.BurstEnergy > 0)
         {
+            EndBlocking();
             currentAttack = InstantiateAttack(Attacks[0]);
         }
     }
@@ -103,6 +106,7 @@ public class PlayerScript : CharacterScript
     {
         if (SwordCanAttack() && Attacks[1].GetComponent<AttackGenerator>().maxEnergyCost <= stateScript.BurstEnergy)
         {
+            EndBlocking();
             currentAttack = InstantiateAttack(Attacks[1]);
         }
     }
@@ -110,6 +114,7 @@ public class PlayerScript : CharacterScript
     {
         if (SwordCanAttack() && Attacks[2].GetComponent<AttackGenerator>().maxEnergyCost <= stateScript.BurstEnergy)
         {
+            EndBlocking();
             currentAttack = InstantiateAttack(Attacks[2]);
         }
     }
@@ -118,15 +123,15 @@ public class PlayerScript : CharacterScript
     {
         if (SwordCanParry())
         {
-            parry.AddParryToBuffer();
-            if (!parry.isBlocking)
-            {
-                animator.Play("Player Parry 1");
-            }
-            else
-            {
-                animator.Play("Player Parry 2");
-            }
+            parry.RegisterParry();
+            // if (!parry.isBlocking)
+            // {
+            //     animator.Play("Player Parry 1");
+            // }
+            // else
+            // {
+            //     animator.Play("Player Parry 2");
+            // }
         }
     }
 
@@ -144,8 +149,9 @@ public class PlayerScript : CharacterScript
 
     public void OnDamage(float damage)
     {
+        // Time.timeScale = 0;
         audioSource.PlayOneShot(DamagedSound);
-        parry.ResetBufferAndCd();
+        // parry.ResetBufferAndCd();
         float f = 8 * (1 + damage * 0.02f);
         cameraScript.ScreenShakeRotSHM((Random.Range(0, 2) == 0 ? -1 : 1) * Mathf.Sqrt(damage) * 0.5f, f, 2f, f * Mathf.Lerp(0.05f, 0.12f, damage * 0.02f));
     }
@@ -157,7 +163,7 @@ public class PlayerScript : CharacterScript
 
     public bool SwordCanAttack()
     {
-        return !parry.IsUsingSword() && currentAttack == null;
+        return !parry.IsParrying() && currentAttack == null;
     }
 
 

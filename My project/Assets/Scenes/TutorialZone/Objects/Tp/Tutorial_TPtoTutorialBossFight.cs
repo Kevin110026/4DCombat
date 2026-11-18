@@ -15,6 +15,7 @@ public class Tutorial_TPtoTutorialBossFight : MonoBehaviour
             ps.GetComponent<CharacterController>().enabled = true;
             ps.stateScript.Hp = ps.stateScript.HpMax;
             ps.stateScript.BurstEnergy = ps.stateScript.BurstEnergyMax;
+            ps.stateScript.TotalEnergy = ps.stateScript.TotalEnergyMax;
             TrainDummy.GetComponent<TrainDummyScript>().active = false;
             TutorialBoss.GetComponent<TutorialBossScript>().start = true;
             // TutorialBoss.GetComponent<TutorialBossScript>().autoAttack = true;

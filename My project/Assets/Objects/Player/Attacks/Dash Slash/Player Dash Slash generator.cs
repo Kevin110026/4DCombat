@@ -34,13 +34,24 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
             dir = Quaternion.Euler(rot) * transform.forward;
         }
 
-        playerScript.ConsumeBurstEnergy(10f);
+        float lastTime = Time.time;
+        float T = 0.5f;
+        float energyConsume = 10f;
+        float energyConsumed = 0;
+
+        void ConsumeEnergy()
+        {
+            energyConsumed += playerScript.ConsumeBurstEnergy(Mathf.Min(energyConsume - energyConsumed, energyConsume * (Time.time - lastTime) / T));
+        }
         StartCoroutine(PlayAnimationAndLoop(Windup));
         animator.speed = 10f;
 
-        AttackHinterscript.NewPlayer(ImplicitHintSound, 0.5f, 0.2f, 0f);
-        cameraScript.FovChangeLinear(-30, 0.5f);
-        yield return new WaitForSeconds(0.7f);
+        AttackHinterscript.NewPlayer(ImplicitHintSound, T, 0.2f, 0f);
+        cameraScript.FovChangeLinear(-30, T);
+        yield return LoopForSeconds(T, ConsumeEnergy);
+        Debug.Log(energyConsumed);
+        // playerScript.ConsumeBurstEnergy(10f);
+        yield return new WaitForSeconds(0.2f);
 
         StartCoroutine(PlayAnimationAndLoop(Slash));
         GameObject attObj = InstantiateAttack(attPrefab);
@@ -65,10 +76,10 @@ public class PlayerDashSlashgenerator : PlayerAttackGenerator
         yield return new WaitForSeconds(0.4f);
 
         animator.speed = 1f;
-        Destroy(attObj);
+        this.ScheduleDestroy(attObj);
         Destroy(gameObject);
 
-        // playerScript.
+        playerScript.stateScript.ResetBurstEnergyCD();
     }
     protected override void OnDestroy()
     {

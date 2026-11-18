@@ -27,7 +27,7 @@ public class PlayerNormalSlashattack : PlayerAttackAttack
             {
                 if (spawner != otherObj && canDamage)
                 {
-                    DamageCharacter(otherObj);
+                    OnHitCharacter(otherObj);
                     break;
                 }
             }

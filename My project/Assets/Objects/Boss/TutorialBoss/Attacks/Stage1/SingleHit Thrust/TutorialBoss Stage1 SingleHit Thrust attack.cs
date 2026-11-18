@@ -16,15 +16,15 @@ public class TutorialBossStage1SingleHitThrustattack : TutorialBossAttackAttack
             {
                 if (hit.collider.gameObject.TryGetComponent<PlayerParryBoxscript>(out var pb))
                 {
-                    pb.VerifyParryForAttack(this);
+                    OnHitParryBox(pb);
                 }
 
                 if (hit.collider.gameObject.TryGetComponent<PlayerScript>(out var ps) && canDamage)
                 {
-                    DamageCharacter(ps.gameObject);
+                    OnHitCharacter(ps.gameObject);
                 }
             }
-            Destroy(gameObject);
+            ScheduleDestroy();
         }
     }
 

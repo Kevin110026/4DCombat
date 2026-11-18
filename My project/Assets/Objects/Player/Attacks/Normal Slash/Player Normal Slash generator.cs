@@ -29,7 +29,7 @@ public class PlayerNormalSlashgenerator : PlayerAttackGenerator
         yield return PlayAnimationAndLoop(windup);
         blade.GetComponent<AudioSource>().PlayOneShot(slashSound);
         attack = InstantiateAttack<PlayerNormalSlashattack>(attackBox);
-        attack.energy = 2f;
+        attack.energy = playerScript.ConsumeBurstEnergy(2f);
         yield return PlayAnimationAndLoop(slash);
         yield return new WaitForSeconds(0.16f);
         Destroy(gameObject);
@@ -38,7 +38,7 @@ public class PlayerNormalSlashgenerator : PlayerAttackGenerator
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        Destroy(attack);
+        this.ScheduleDestroy(attack);
         Destroy(camWave);
     }
 }

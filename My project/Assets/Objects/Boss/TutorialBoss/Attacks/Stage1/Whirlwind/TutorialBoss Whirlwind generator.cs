@@ -8,8 +8,8 @@ public class TutorialBossWhirlwindgenerator : TutorialBossAnimatedAttack
     [SerializeField] Object SpinBegin;
     [SerializeField] Object Spinning;
     [SerializeField] Object SpinEnd;
-    [SerializeField] float RotationSpeed = 90f;
-    [SerializeField] float MoveSpeed = 3f;
+    [SerializeField] float RotationSpeed = 180f;
+    [SerializeField] float MoveSpeed = 6f;
     public float knockbackMag = 1f;
     private bool move = false;
     private Quaternion rot;

@@ -26,12 +26,12 @@ public class TripleSlashattackSlashscript : AttackScript
         {
             if (canDamage)
             {
-                DamageCharacter(other.gameObject);
+                OnHitCharacter(other.gameObject);
             }
         }
         else if (other.TryGetComponent<PlayerParryBoxscript>(out PlayerParryBoxscript parryBox))
         {
-            parryBox.VerifyParryForAttack(this);
+            OnHitParryBox(parryBox);
         }
     }
 

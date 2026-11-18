@@ -28,7 +28,7 @@ public class PlayerDashSlashattack : PlayerAttackAttack
             {
                 if (spawner != hitObj && canDamage)
                 {
-                    DamageCharacter(hitObj);
+                    OnHitCharacter(hitObj);
                     attackGenerator.GetComponent<PlayerDashSlashgenerator>().stopPoint =
                         ori + dir * hit.distance;
                     Destroy(gameObject);

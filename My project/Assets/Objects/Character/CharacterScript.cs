@@ -48,33 +48,36 @@ public class CharacterScript : MonoBehaviour
 
     float lastDamageTime;
 
-    public void Damage(float damage)
+    public float Damage(float damage)
     {
-        stateScript.Hp -= damage;
-        lastDamageTime = Time.time;
+        float ret = stateScript.Damage(damage);
         OnDamageObservers?.Invoke(damage);
+        return ret;
     }
 
     public event Action<float> OnHealObservers;
 
-    public void Heal(float heal)
+    public float Heal(float heal)
     {
-        stateScript.Hp += heal;
+        float ret = stateScript.Heal(heal);
         OnHealObservers?.Invoke(heal);
+        return ret;
     }
     public event Action OnConsumeBurstEnergyObservers;
 
-    public void ConsumeBurstEnergy(float energy)
+    public float ConsumeBurstEnergy(float energy)
     {
-        stateScript.BurstEnergy -= energy;
+        float ret = stateScript.ConsumeBurstEnergy(energy);
         OnConsumeBurstEnergyObservers?.Invoke();
+        return ret;
     }
     public event Action OnConsumeTotalEnergyObservers;
 
-    public void ConsumeTotalEnergy(float energy)
+    public float ConsumeTotalEnergy(float energy)
     {
-        stateScript.TotalEnergy -= energy;
+        float ret = stateScript.ConsumeTotalEnergy(energy);
         OnConsumeTotalEnergyObservers?.Invoke();
+        return ret;
     }
 
 }

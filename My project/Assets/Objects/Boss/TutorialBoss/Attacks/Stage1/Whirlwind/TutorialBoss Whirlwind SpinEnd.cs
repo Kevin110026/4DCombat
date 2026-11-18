@@ -14,6 +14,6 @@ public class TutorialBossWhirlwindSpinEnd : TutorialBossAnimatedAttack
         base.OnDestroy();
         TutorialBossWhirlwindattack attack = blade.GetComponent<TutorialBossWhirlwindattack>();
         if (attack != null)
-            Destroy(attack);
+            this.ScheduleDestroy(attack);
     }
 }

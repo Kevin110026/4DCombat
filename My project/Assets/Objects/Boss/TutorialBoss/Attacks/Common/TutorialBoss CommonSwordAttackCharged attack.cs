@@ -25,17 +25,19 @@ public class TutorialBossCommonSwordAttackChargedattack : TutorialBossAttackAtta
     protected override void Update()
     {
         base.Update();
+        animator.Update(0);
         Vector3 curPos = blade.transform.position;
         Quaternion curRot = blade.transform.rotation;
         if (lastPos != null)
         {
             Vector3 dir = curPos - lastPos;
             knockbackDir = dir;
-            RaycastHit[] hits = Physics.BoxCastAll(lastPos, blade_scale / 2, dir, lastRot, dir.magnitude);
+            Quaternion midRot = Quaternion.Slerp(lastRot, curRot, 0.5f);
+            RaycastHit[] hits = Physics.BoxCastAll(lastPos, blade_scale / 2, dir, midRot, dir.magnitude);
             System.Array.Sort(hits, (hit1, hit2) => hit1.distance.CompareTo(hit2.distance));
             foreach (RaycastHit hit in hits)
             {
-                OnTriggerEnter(hit.collider);
+                OnRaycastHit(hit.collider);
             }
         }
         lastPos = curPos;
@@ -43,18 +45,18 @@ public class TutorialBossCommonSwordAttackChargedattack : TutorialBossAttackAtta
     }
 
 
-    virtual protected void OnTriggerEnter(Collider other)
+    virtual protected void OnRaycastHit(Collider other)
     {
         if (other.TryGetComponent<PlayerScript>(out PlayerScript player))
         {
             if (canDamage)
             {
-                DamageCharacter(other.gameObject);
+                OnHitCharacter(other.gameObject);
             }
         }
         else if (other.TryGetComponent<PlayerParryBoxscript>(out PlayerParryBoxscript parryBox))
         {
-            parryBox.VerifyParryForAttack(this);
+            OnHitParryBox(parryBox);
         }
     }
     protected override void DamageCharacter(GameObject player)

@@ -16,7 +16,7 @@ public class PlayerControlScript : MonoBehaviour
     [HideInInspector] public GameObject parryBox;
     [HideInInspector] public GameObject attackBox;
     [HideInInspector] public CameraScript cameraScript;
-    public float playerDashCooldown = 1.0f;
+    public float playerDashCooldown = 0.3f;
     private AudioSource audioSource;
     public AudioClip dashSound;
 
@@ -56,7 +56,7 @@ public class PlayerControlScript : MonoBehaviour
         {
             if (!parry.IsParrying() && Time.time >= RMBTime + 0.12f)
                 playerScript.Parry();
-            playerScript.EndBlocking();
+            // playerScript.EndBlocking();
             // Debug.Log("RMB hold time: " + (Time.time - RMBTime));
         }
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -125,7 +125,8 @@ public class PlayerControlScript : MonoBehaviour
         }
         if (Keyboard.current.leftShiftKey.wasPressedThisFrame && playerDashLastTime + playerDashCooldown <= Time.time)
         {
-            characterMovementScript.AddVelocity(move * 15f);
+            playerScript.EndBlocking();
+            characterMovementScript.AddVelocity(move * 20f);
             audioSource.PlayOneShot(dashSound);
             playerDashLastTime = Time.time;
         }

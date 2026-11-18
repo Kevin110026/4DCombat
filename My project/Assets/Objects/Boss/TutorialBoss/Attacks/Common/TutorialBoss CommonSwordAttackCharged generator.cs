@@ -110,7 +110,7 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
         isSlashing = false;
 
         // yield return new WaitForSeconds(0.04f);
-        Destroy(attack);
+        this.ScheduleDestroy(attack);
 
         animator.speed = 1;
     }
@@ -118,6 +118,6 @@ public class TutorialBossCommonSwordAttackChargedgenerator : TutorialBossAnimate
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        Destroy(attack);
+        this.ScheduleDestroy(attack);
     }
 }

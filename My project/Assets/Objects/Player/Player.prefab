@@ -639,9 +639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92664a78070160e44a2c3525c938b7da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterMovementScript
-  maxMoveSpeed: 5
+  maxMoveSpeed: 10
   maxJumpHeight: 1.5
-  maxAcceleration: 30
+  maxAcceleration: 60
   gravity: -9.81
   velocity: {x: 0, y: 0, z: 0}
   doneMoveTo: 1
@@ -664,8 +664,13 @@ MonoBehaviour:
   Hp: 100
   TotalEnergyMax: 100
   TotalEnergy: 100
+  TotalEnergyRecoverCD: 1
+  TotalEnergyRecoverRate: 5
   BurstEnergyMax: 30
   BurstEnergy: 30
+  BurstEnergyTransformCD: 2
+  BurstEnergyTransformRate: 15
+  lastDamageTime: 0
 --- !u!82 &3031377116375743653
 AudioSource:
   m_ObjectHideFlags: 0
@@ -784,7 +789,7 @@ MonoBehaviour:
   parryBox: {fileID: 0}
   attackBox: {fileID: 0}
   cameraScript: {fileID: 0}
-  playerDashCooldown: 1
+  playerDashCooldown: 0.3
   dashSound: {fileID: 8300000, guid: 26c9f2aa4459e0547abaf2632e99628a, type: 3}
 --- !u!95 &6170599700074712284
 Animator:
@@ -834,6 +839,7 @@ MonoBehaviour:
   canTurn: 1
   canAct: 1
   defeated: 0
+  animator: {fileID: 0}
   cameraScript: {fileID: 0}
 --- !u!1 &8706630689029570055
 GameObject:
@@ -1007,43 +1013,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.674
+      value: 0.770096
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.003
+      value: 0.022344
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.61
+      value: 0.515312
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.25624657
+      value: 0.08072103
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.12682527
+      value: -0.1684667
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.55618364
+      value: -0.63496363
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.7803287
+      value: -0.74961615
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -126.581
+      value: -101.719
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -234.136
+      value: -132.37
       objectReference: {fileID: 0}
     - target: {fileID: 2567776313449992904, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 65.198
+      value: -27.22501
       objectReference: {fileID: 0}
     - target: {fileID: 3623178446399115956, guid: 716a2f99d3df3bd49a73bd80b520a8dd, type: 3}
       propertyPath: m_Layer
@@ -1153,6 +1159,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAttackBox
       objectReference: {fileID: 0}
+    - target: {fileID: 8394597668781557746, guid: a90379c003b5a274390a4fa7d09ef827, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1228,6 +1238,10 @@ PrefabInstance:
       propertyPath: BlockSoundMedium
       value: 
       objectReference: {fileID: 8300000, guid: 4717e99f7f739b546bd24da0cc8cbd5c, type: 3}
+    - target: {fileID: 8149849651591014406, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
+      propertyPath: HitParryBoxSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e8c0a095fe156824d988ded374bf4048, type: 3}
     - target: {fileID: 8149849651591014406, guid: e439eb5336eb1ec46b5ef38458575a27, type: 3}
       propertyPath: blockEnergyConsumeMultiplier
       value: 2

@@ -226,7 +226,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerParryBoxscript
   parryCD: 0.25
-  parryWindow: 0.3
+  parryWindow: 0.13
+  imperfectParryWindow: 0.23
+  clearMissTime: 0.35
   blockEnergyConsumeMultiplier: 2
   parryLightObject: {fileID: 8923741070187111660}
   parrySounds: []
@@ -237,6 +239,7 @@ MonoBehaviour:
   BlockSoundMedium: {fileID: 0}
   BlockSoundHeavy: {fileID: 0}
   BlockSoundBreak: {fileID: 0}
+  HitParryBoxSound: {fileID: 0}
 --- !u!54 &7961449092292008404
 Rigidbody:
   m_ObjectHideFlags: 0

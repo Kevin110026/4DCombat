@@ -20,7 +20,7 @@ public class CharacterMovementScript : MonoBehaviour
     private Vector3 idealVelocity;
     private Vector3 idealAcceleration;
     private Vector3 optimizedAcceleration;
-    private float velocityDecay = 0.1f;
+    // private float velocityDecay = 0.1f;
     private Vector3 acceleration = Vector3.zero;
     [HideInInspector]
     public bool doneMoveTo = true;
@@ -69,8 +69,9 @@ public class CharacterMovementScript : MonoBehaviour
             MoveInVelocityXZ(speedVec, speed);
         }
 
-        velocity.x = Mathf.Sign(velocity.x) * Mathf.Max(0, Mathf.Abs(velocity.x) - velocityDecay * Time.deltaTime);
-        velocity.z = Mathf.Sign(velocity.z) * Mathf.Max(0, Mathf.Abs(velocity.z) - velocityDecay * Time.deltaTime);
+
+        // velocity.x = Mathf.Sign(velocity.x) * Mathf.Max(0, Mathf.Abs(velocity.x) - velocityDecay * Time.deltaTime);
+        // velocity.z = Mathf.Sign(velocity.z) * Mathf.Max(0, Mathf.Abs(velocity.z) - velocityDecay * Time.deltaTime);
 
         idealAcceleration = idealVelocity - velocity;
         idealAcceleration.y = 0;

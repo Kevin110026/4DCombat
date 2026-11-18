@@ -5,8 +5,8 @@ using UnityEngine.Rendering.Universal;
 public class TutorialBossMovementBackOff : TutorialBossAttackGenerator
 {
 
-    public float BackOffDistance = 5;
-    public float BackOffAcceleration = 40;
+    public float BackOffDistance = 10;
+    public float BackOffAcceleration = 80;
     protected override IEnumerator StartAttack()
     {
         animator.Play("TutorialBoss Idle");

@@ -107,6 +107,7 @@ public class CameraScript : MonoBehaviour
 
     IEnumerator ScreenShakeRotSHMIEnumerator(float amplitude, float frequency, float gamma, float number)
     {
+        // Debug.Log(amplitude + ":" + frequency + ":" + gamma + ":" + number);
         Vector3 rot;
         float d = 0;
         float duration = number / frequency;
@@ -116,9 +117,11 @@ public class CameraScript : MonoBehaviour
         {
             float t = Time.time - startTime;
             float x = amplitude * Mathf.Exp(-gamma * t) * Mathf.Cos(Mathf.PI * 2 * t * frequency);
+            // Debug.Log(x);
 
             rot = cam.transform.localRotation.eulerAngles;
             rot.z += x - d;
+            // Debug.Log(rot);
             cam.transform.localRotation = Quaternion.Euler(rot);
 
             d = x;

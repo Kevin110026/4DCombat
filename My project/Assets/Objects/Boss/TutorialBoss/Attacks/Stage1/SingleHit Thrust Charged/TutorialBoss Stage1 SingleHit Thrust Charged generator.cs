@@ -45,8 +45,8 @@ public class TutorialBossStage1SingleHitThrustChargedgenerator : TutorialBossCom
         isSlashing = false;
 
         yield return new WaitForSeconds(0.04f);
-        Destroy(attObj);
-        Destroy(fakeAtt);
+        this.ScheduleDestroy(attObj);
+        this.ScheduleDestroy(fakeAtt);
 
         animator.speed = 1;
     }

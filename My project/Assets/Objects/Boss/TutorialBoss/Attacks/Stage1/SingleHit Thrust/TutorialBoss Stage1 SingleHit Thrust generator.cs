@@ -47,7 +47,7 @@ public class TutorialBossStage1SingleHitThrustgenerator : TutorialBossCommonSwor
         animator.speed = AttackAnimationPlaySpeed;
         yield return StartCoroutine(PlayAnimationAndLoop(AttackAnimation, AttackLoopAction));
 
-        Destroy(attObj);
-        Destroy(fakeAtt);
+        this.ScheduleDestroy(attObj);
+        this.ScheduleDestroy(fakeAtt);
     }
 }

@@ -7,7 +7,7 @@ public class TutorialBossWhirlwindSpinBegin : TutorialBossAnimatedAttack
     [HideInInspector] public float knockbackMag = 1f;
     protected override IEnumerator StartAttack()
     {
-        TutorialBossWhirlwindattack attack = blade.AddComponent<TutorialBossWhirlwindattack>();
+        TutorialBossWhirlwindattack attack = InstantiateAttack<TutorialBossWhirlwindattack>(blade);
         attack.spawner = spawner;
         attack.target = target;
         attack.energy = attack.BaseEnergy;

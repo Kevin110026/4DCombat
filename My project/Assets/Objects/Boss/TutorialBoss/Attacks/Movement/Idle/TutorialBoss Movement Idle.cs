@@ -19,21 +19,21 @@ public class TutorialBossMovementIdle : TutorialBossAttackGenerator
                 leftrightSwapCd += Random.Range(2f, 4f);
                 leftright = -leftright;
             }
-            rightSpeed = Mathf.Clamp(rightSpeed + Time.deltaTime * leftright * 9, -3f, 3f);
+            rightSpeed = Mathf.Clamp(rightSpeed + Time.deltaTime * leftright * 9, -6f, 6f);
 
             float dist = (spawner.transform.position - target.transform.position).magnitude;
             if (dist > 6)
             {
-                forwardSpeed = Mathf.Clamp(forwardSpeed + 16 * Time.deltaTime, -4, 8);
+                forwardSpeed = Mathf.Clamp(forwardSpeed + 16 * Time.deltaTime, -8, 16);
                 rightSpeed *= 0.3f;
             }
             else if (dist < 2.5)
             {
-                forwardSpeed = Mathf.Clamp(forwardSpeed - 16 * Time.deltaTime, -4, 8);
+                forwardSpeed = Mathf.Clamp(forwardSpeed - 16 * Time.deltaTime, -8, 16);
                 rightSpeed *= 0.3f;
             }
             else
-                forwardSpeed = Mathf.Clamp(forwardSpeed - 16 * Mathf.Sign(forwardSpeed) * Time.deltaTime, -4, 8);
+                forwardSpeed = Mathf.Clamp(forwardSpeed - 16 * Mathf.Sign(forwardSpeed) * Time.deltaTime, -8, 16);
 
             spawner.GetComponent<CharacterController>()
             .Move(Time.deltaTime * (spawner.transform.forward * forwardSpeed + spawner.transform.right * rightSpeed));

@@ -46,7 +46,7 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
         tutorialBossScript.FaceTarget();
         CharacterController cc = spawner.GetComponent<CharacterController>();
         float dist = (spawner.transform.position - target.transform.position).magnitude - 3f;
-        float k = Mathf.Clamp(dist, -4 * Time.deltaTime, 8 * Time.deltaTime);
+        float k = Mathf.Clamp(dist, -8 * Time.deltaTime, 16 * Time.deltaTime);
         cc.Move(k * spawner.transform.forward);
     }
 
@@ -64,7 +64,7 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
     {
         CharacterController cc = spawner.GetComponent<CharacterController>();
         float dist = (spawner.transform.position - target.transform.position).magnitude - 3f;
-        float k = Mathf.Clamp(dist, -1 * Time.deltaTime, 4 * Time.deltaTime);
+        float k = Mathf.Clamp(dist, -2 * Time.deltaTime, 8 * Time.deltaTime);
         cc.Move(k * spawner.transform.forward);
 
         if (camWave == null)
@@ -75,7 +75,7 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
     TutorialBossCommonSwordAttackattack attack;
     protected virtual IEnumerator Attack()
     {
-
+        animator.Update(0);
         attack = InstantiateAttack<TutorialBossCommonSwordAttackattack>(blade);
         attack.energy = 4.5f;
         attack.knockbackMag = knockbackMag;
@@ -93,22 +93,22 @@ public class TutorialBossCommonSwordAttackgenerator : TutorialBossAnimatedAttack
         animator.speed = AttackAnimationPlaySpeed;
         yield return StartCoroutine(PlayAnimationAndLoop(AttackAnimation, AttackLoopAction));
 
-        Destroy(attack);
+        this.ScheduleDestroy(attack);
     }
 
     public override void OnParried(GameObject parrier)
     {
         base.OnParried(parrier);
         // Debug.Log("parry cam wave");
-        camWave.Parried();
+        // camWave.Parried();
         // Destroy(camWave);
     }
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        Destroy(attack);
+        this.ScheduleDestroy(attack);
         // Destroy(camWave);
-        camWave.setTargetObj(null);
+        // camWave.setTargetObj(null);
     }
     // protected virtual void OnDestroy()
     // {
